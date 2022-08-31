@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "jF7eNLDAM6URfAgqSt9bzaf1w7SeJxUT6uoWJkp91AX7P70cM3f3hzGGTSpMsB8N/UF/J33uvlREGoO6wUjARQ==",
+  "dgSpecHash": "xRbJG6JzMx5SYyoXBFivFRUW+sesTRPNIijEjOTKVA8vnujbeldErWWTSjkrCXcvd0+Ae0IJYjUdsm+4dHPNhA==",
   "success": true,
   "projectFilePath": "C:\\Users\\thoma\\Dropbox\\CEID\\Διπλωματική\\BettingApp\\BuildingBlocks\\EventBus\\EventBusRabbitMQ\\EventBusRabbitMQ\\EventBusRabbitMQ.csproj",
   "expectedPackageFiles": [
