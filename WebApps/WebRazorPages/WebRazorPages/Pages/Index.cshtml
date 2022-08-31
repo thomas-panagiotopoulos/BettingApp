@@ -1,0 +1,115 @@
+﻿@page "{handler?}"
+@model IndexModel
+
+@section UserBar{
+
+    <partial name="_UserBar"/>
+}
+
+@section Scripts{ 
+
+    <partial name="_CurrentMinuteTickerScript"/>
+    <partial name="_SportsbookSignalrHubScript"/>
+
+    @if(User.Identity.IsAuthenticated)
+    {
+        <partial name="_BetslipsSignalrHubScript" />
+    }
+} 
+
+<div class="index-sportsbook-content">
+    <div class="sportsbook-bar">
+        <form class="date-picker-form" method="get" asp-page-handler="LoadMatchesByDate">
+            <input type="date" value="@Model.Date.ToString("yyyy-MM-dd")" asp-for="@Model.Date" />
+            <button type="submit">Go</button>
+        </form>
+        <label class="index-sportsbook-lablel">
+            Sportsbook
+        </label>
+        <span class="error-message"></span>
+    </div>
+    
+    @if (Model.Matches.Any())
+    {
+        <div class="match-list-head">
+            <table>
+                <col >
+                <col >
+                <colgroup span="@Model.MatchResults.Count" ></colgroup>
+                <tr>
+                    <th rowspan="2" class="match-id-column">Id</th>
+                    <th rowspan="2" class="match-column">Match</th>
+                    <th colspan="@Model.MatchResults.Count" scope="colgroup" class="mathch-results-columns">Odds</th>
+                </tr>
+                <tr>
+                    @foreach (var mr in Model.MatchResults.OrderBy(mr => mr.Id))
+                    {
+                        <th scope="col" class="mathch-results-column">@mr.AliasName</th>
+                    }
+                </tr>
+            </table>
+        </div>
+        <div class="match-list-body">
+            <table>
+                <col>
+                <col>
+                <colgroup span="@Model.MatchResults.Count"></colgroup>
+                @foreach (var league in Model.Leagues)
+                {
+                    <tr>
+                        <th colspan="@(Model.MatchResults.Count+2) ">@league.Name</th>
+                    </tr>
+                    @foreach (var match in Model.Matches)
+                    {
+                        if (match.LeagueId == league.Id)
+                        {
+                            <tr>
+                                <partial name="_MatchPartial" model="@match" />
+                            </tr>
+                        }
+                    }
+                }
+            </table>
+        </div>
+        
+    }
+    else
+    {
+        <div class="centered-content-container">
+            <div class="centered-content-item">
+                No scheduled matches found
+            </div>
+        </div>
+    }
+    
+</div>
+<div class="index-betslip-content">
+    <label class="index-betslip-label">Betslip Preview</label><br />
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        if (Model.Betslip != null)
+        {
+            <div>
+                <partial name="_IndexBetslip" model="@Model.Betslip" />
+            </div>
+        }
+        else
+        {
+
+            <div class="centered-content-container">
+                <div class="centered-content-item">
+                    An error occured while loading your Betslip
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="centered-content-container">
+            <div class="centered-content-item">
+                Please <a asp-page="/Dashboard/Account/Signin">Sign in</a> to view your Betslip content
+            </div>
+        </div>
+    }
+</div>

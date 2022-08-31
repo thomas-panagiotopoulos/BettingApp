@@ -1,0 +1,95 @@
+{
+  "ReRoutes": [
+    {
+      "DownstreamPathTemplate": "/sportsbook/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "sportsbook-api", //sportsbook.api
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/sportsbook/{everything}",
+      "UpstreamHttpMethod": []
+    },
+    {
+      "DownstreamPathTemplate": "/betslips/{everything}",
+      //"DownstreamPathTemplate": "/home/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "betslips-api", //betslips.api
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/betslips/{everything}",
+      "UpstreamHttpMethod": [],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "IdentityApiKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/betting/{everything}",
+      //"DownstreamPathTemplate": "/home/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "betting-api", //betting.api
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/betting/{everything}",
+      "UpstreamHttpMethod": [],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "IdentityApiKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/hub/sportsbookhub/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "sportsbook-signalrhub", //sportsbook-signalrhub
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/hub/sportsbookhub/{everything}",
+      "UpstreamHttpMethod": []
+    },
+    {
+      "DownstreamPathTemplate": "/hub/betslipshub/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "betslips-signalrhub", //betslips-signalrhub
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/hub/betslipshub/{everything}",
+      "UpstreamHttpMethod": [],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "IdentityApiKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/hub/bettinghub/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "betting-signalrhub", //betting-signalrhub
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/hub/bettinghub/{everything}",
+      "UpstreamHttpMethod": [],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "IdentityApiKey",
+        "AllowedScopes": []
+      }
+    }
+  ],
+  "GlobalConfiguration": {}
+}

@@ -1,0 +1,76 @@
+﻿@model Selection
+@{ 
+    bool displayTicker = !Model.StatusName.Equals("Canceled") &&
+                         !Model.CurrentMinute.Equals("0") &&
+                         !Model.CurrentMinute.Equals("HT") &&
+                         !Model.CurrentMinute.Equals("FT");
+}
+    <div class="bet-selection">
+
+        <div class="bet-selection-match-id">
+            <strong>@Model.RelatedMatchId</strong>
+        </div>
+        <div class="bet-selection-current-minute">
+            <div id="Selection#@Model.Id#CurrentMinute">
+                @if (!Model.StatusName.Equals("Canceled"))
+                {
+                    @(Model.CurrentMinute.Equals("0") ? Model.KickoffDateTime.ToString("MM/dd HH:mm") : Model.CurrentMinute)
+                }
+                else
+                {
+                    @("Canceled")
+                }
+            </div>
+            <div class="current-minute-ticker" id="Selection#@Model.Id#Ticker" @(displayTicker ? "" : "hidden")>'</div>
+        </div>
+        <div class="bet-selection-gambler-match-result">
+            <strong>Result: </strong>@Model.GamblerMatchResultAliasName
+        </div>
+
+        <div class="bet-selection-home-club-name">
+            @Model.HomeClubName
+        </div>
+        <div class="bet-selection-home-club-score">
+            <div id="Selection#@Model.Id#HomeClubScore">
+                @if (!Model.CurrentMinute.Equals("0") && !Model.StatusName.Equals("Canceled"))
+                {
+                    @Model.HomeClubScore
+                }
+                else
+                {
+                    @("-")
+                }
+            </div>
+        </div>
+        <div class="bet-selection-odd">
+            <strong>Odd: </strong>
+            <div id="Selection#@Model.Id#Odd" @(Model.IsCanceled ? "style=color:lightgray" : "")>@Model.Odd</div>
+        </div>
+
+        <div class="bet-selection-away-club-name">
+            @Model.AwayClubName
+        </div>
+        <div class="bet-selection-away-club-score">
+            <div id="Selection#@Model.Id#AwayClubScore">
+                @if (!Model.CurrentMinute.Equals("0") && !Model.StatusName.Equals("Canceled"))
+                {
+                    @Model.AwayClubScore
+                }
+                else
+                {
+                    @("-")
+                }
+            </div>
+        </div>
+        <div class="bet-selection-result">
+            <strong>Outcome: </strong>
+            <div id="Selection#@Model.Id#Result" 
+                 @(Model.StatusName.Equals("Canceled") || Model.CurrentMinute.Equals("0") ? "hidden" : "")>
+                @Model.ResultName
+            </div>
+            <div id="Selection#@Model.Id#DummyResult" 
+                 @(Model.StatusName.Equals("Canceled") || Model.CurrentMinute.Equals("0") ? "" : "hidden")>
+                -
+            </div>
+        </div>
+    </div>

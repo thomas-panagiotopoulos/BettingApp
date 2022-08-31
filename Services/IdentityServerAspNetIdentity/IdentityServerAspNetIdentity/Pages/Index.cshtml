@@ -1,0 +1,30 @@
+﻿@page
+@model IdentityServerAspNetIdentity.Pages.IndexModel
+
+@using Microsoft.AspNetCore.Identity
+@using IdentityServerAspNetIdentity.Data
+@inject SignInManager<AppUser> SignInManager
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+<h3>Home Page</h3>
+<p>This is the home page</p>
+@if (SignInManager.IsSignedIn(User))
+{
+    <p>
+        Welcome @User.Identity.Name!
+    </p>
+    <form action="~/Auth/Signout" method="GET">
+        <button type="submit" class="btn btn-primary">Sign Out</button>
+    </form>
+}
+else
+{
+    <form style="display:inline" action="~/Auth/Signin" method="GET">
+        <button type="submit" class="btn btn-primary">Go to Sign In Page</button>
+    </form>
+    <form style="display:inline" action="~/Auth/Register" method="GET">
+        <button type="submit" class="btn btn-primary">Go to Register Page</button>
+    </form>
+}

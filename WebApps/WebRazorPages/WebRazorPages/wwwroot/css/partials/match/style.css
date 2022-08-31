@@ -1,0 +1,36 @@
+﻿.match-id {
+    height: 100px;
+    width: 100px;
+    padding: 5px;
+    color: white;
+    background-color: #444444;
+}
+
+.match {
+    height: 100px;
+    width: 240px;
+    padding: 5px;
+    padding-right: 15px;
+    color: white;
+    background-color: #444444;
+}
+
+.match-club-name{
+    display: inline;
+    position: relative;
+    float: left;
+}
+
+.match-club-score {
+    display: inline;
+    position: relative;
+    float: right;
+}
+
+.match-current-minute{
+    padding-top: 5px;
+}
+
+.match-current-minute div {
+    display: inline;
+}

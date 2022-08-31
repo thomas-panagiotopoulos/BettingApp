@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31112.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Betting.API", "Betting.API\Betting.API.csproj", "{C2413D21-6259-4D73-B638-88B1596090C8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C2413D21-6259-4D73-B638-88B1596090C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2413D21-6259-4D73-B638-88B1596090C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2413D21-6259-4D73-B638-88B1596090C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2413D21-6259-4D73-B638-88B1596090C8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ACA913D7-06C7-4032-A917-2B9398D6F9BE}
+	EndGlobalSection
+EndGlobal

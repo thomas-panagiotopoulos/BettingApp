@@ -1,0 +1,132 @@
+﻿@page "{handler?}"
+@model BettingApp.WebApps.WebRazorPages.Pages.Betslip.IndexModel
+
+@section UserBar{
+
+    <partial name="_UserBar" />
+}
+
+@section Scripts{
+    <partial name="_CurrentMinuteTickerScript" />
+    <partial name="_BetslipsSignalrHubScript" />
+}
+
+<div class="betslip-selections">
+    <label class="betslip-selections-label">
+        Betslip Selections
+    </label>
+
+    <div class="betslip-selections-list">
+        @if (Model.Betslip != null)
+        {
+            @if (Model.Betslip.Selections.Any())
+            {
+                <table class="betslip-selections-list-table">
+                    @foreach (var selection in Model.Betslip.Selections)
+                    {
+                        <tr>
+                            <td>
+                                <partial name="_BetslipSelectionPartial" model="@selection" />
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+            else
+            {
+                <div class="centered-content-container">
+                    <div class="centered-content-item">
+                        Empty
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="centered-content-container">
+                <div class="centered-content-item">
+                    An error occured while loading your Betslip
+                </div>
+            </div>
+        }
+    </div>
+    
+</div>
+
+<div class="betslip-panel">
+    <label class="betslip-panel-label">
+        Betslip Details
+    </label>
+
+    <div class="betslip-panel-content">
+        @if (Model.Betslip != null)
+        {
+            <label>Selections: </label>
+            <input id="betslip-selections-count" value="@Model.Betslip.Selections?.Count" readonly />
+            <span></span>
+            <span></span>
+
+            <label>Total Odd: </label>
+            <input id="betslip-total-odd" value="@Model.Betslip.TotalOdd" readonly />
+            <span></span>
+            <span></span>
+
+            <label>Winnings: </label>
+            <input id="betslip-potential-winnings" value="@Model.Betslip.PotentialWinnings €" readonly />
+            <span></span>
+            <span></span>
+
+            <label>Profit: </label>
+            <input id="betslip-potential-profit" value="@Model.Betslip.PotentialProfit €" readonly />
+            <span></span>
+            <span></span>
+
+            <form class="betslip-panel-update-wagered-amount-form" method="post"
+                  asp-page="/Betslip/Index" asp-page-handler="UpdateWageredAmount">
+                <input type="hidden" value="@ViewData["ReturnUrl"]" name="returnUrl"/>
+                <label>Wagered amount: </label>
+                <input id="betslip-wagered-amount" name="wageredAmount"
+                       type="number" min="0.01" max="5000" step=".01" placeholder="@Model.Betslip.WageredAmount €" required />
+                <button type="submit" class="btn-sm">Update</button>
+            </form>
+            <span></span>
+
+            <label>Wallet Balance: </label>
+            <input id="betslip-wallet-balance" value="@(Model.WalletBalance >= 0 ? Model.WalletBalance : "Not available") €" 
+                   @(Model.WalletBalance < Model.Betslip.WageredAmount ? "style=color:hotpink" : "") readonly />
+            <form class="betslip-panel-top-up-wallet-form"
+                  asp-page="/Dashboard/Wallet/TopUp" method="get">
+                <button type="submit">Top Up Wallet</button>
+            </form>
+            <span></span>
+
+            <form class="index-betslip-panel-clear-betslip-form" method="post"
+                  asp-page="/Betslip/Index" asp-page-handler="ClearBetslip" asp-route-returnUrl="@ViewData["ReturnUrl"]">
+                <button type="submit" class="btn-sm" @(!Model.Betslip.Selections.Any() ? "disabled" : "")>
+                    Clear Betslip
+                </button>
+            </form>
+            <form class="betslip-panel-checkout-form"
+                  asp-page="/Betslip/Index" asp-page-handler="CheckoutBetslip" method="post">
+                <button id="betslip-checkout-button" type="submit" class="btn-success btn-lg"
+                        @(!Model.Betslip.IsBetable ? "disabled" : "")>
+                    Checkout
+                </button>
+            </form>
+
+            <div class="betslip-panel-betable-status-label">
+                <label id="betslip-betable-status">
+                    @(!Model.Betslip.IsBetable ? "Not Betable" : "")
+                </label>
+            </div>
+        }
+        else
+        {
+            <div class="centered-content-container">
+                <div class="centered-content-item">
+                    An error occured while loading your Betslip
+                </div>
+            </div>
+        }
+    </div>
+</div>

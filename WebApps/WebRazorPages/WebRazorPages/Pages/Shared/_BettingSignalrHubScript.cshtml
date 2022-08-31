@@ -1,0 +1,177 @@
+﻿@using Microsoft.AspNetCore.Authentication;
+@using Microsoft.Extensions.Options
+@inject IOptions<AppSettings> settings
+@{
+    string bettingSignalrHubUrl;
+
+    if (settings.Value.IsContainerEnv == true)
+    {
+        // If we manage to fix the routing issue when attempting to connect to SignalrHubs through the Ocelot ApiGw,
+        // then we will switch to using the Web.Bff.Gambling Url. Until then, we connect to SignalrHubs directly
+        // from their external Urls.
+        //bettingSignalrHubUrl = settings.Value.GamblingUrlExternal;
+        bettingSignalrHubUrl = settings.Value.BettingSignalrHubUrl;
+    }
+    else
+    {
+        bettingSignalrHubUrl = settings.Value.BettingSignalrHubUrl;
+    }
+}
+<script type="text/javascript">
+
+    if ('@User.Identity.IsAuthenticated' === 'True') {
+
+        stablishBettingHubConnection((bettingConn) => registerBettingHubHandlers(bettingConn));
+    }
+
+    function stablishBettingHubConnection(cb) {
+        let connection = new signalR.HubConnectionBuilder()
+            .withUrl('@bettingSignalrHubUrl/hub/bettinghub', {
+                    accessTokenFactory: () => {
+                        return "Authorization", getToken();
+                    }
+            })
+            .withAutomaticReconnect()
+            .build();
+
+            connection.start().then(function () {
+                console.log('User Connected to Betting Signalr Hub');
+                cb(connection);
+            });
+    }
+
+    function getToken() {
+            return '@Context.GetTokenAsync("access_token").Result';
+    }
+
+    function registerBettingHubHandlers(connection) {
+        connection.on("SelectionCanceled", (message) => {
+            document.getElementById("Selection#" + message.selectionId + "#CurrentMinute").innerHTML = "Canceled";
+            document.getElementById("Selection#" + message.selectionId + "#HomeClubScore").innerHTML = "-";
+            document.getElementById("Selection#" + message.selectionId + "#AwayClubScore").innerHTML = "-";
+            document.getElementById("Selection#" + message.selectionId + "#Ticker").hidden = true;
+            document.getElementById("Selection#" + message.selectionId + "#Result").hidden = true;
+            document.getElementById("Selection#" + message.selectionId + "#DummyResult").hidden = false;
+            document.getElementById("Selection#" + message.selectionId + "#Odd").style.color = "lightgrey";
+        });
+
+        connection.on("SelectionCurrentMinuteChanged", (message) => {
+            var currentMinute = document.getElementById("Selection#" + message.selectionId + "#CurrentMinute").innerHTML;
+            var compare = currentMinute.localeCompare("Canceled");
+            if (compare != 0) {
+                document.getElementById("Selection#" + message.selectionId + "#CurrentMinute").innerHTML = message.currentMinute;
+                if (message.currentMinute.localeCompare("1") == 0) {
+                    document.getElementById("Selection#" + message.selectionId + "#HomeClubScore").innerHTML = 0;
+                    document.getElementById("Selection#" + message.selectionId + "#AwayClubScore").innerHTML = 0;
+                    document.getElementById("Selection#" + message.selectionId + "#Ticker").hidden = false;
+                    document.getElementById("Selection#" + message.selectionId + "#Result").hidden = false;
+                    document.getElementById("Selection#" + message.selectionId + "#DummyResult").hidden = true;
+                }
+                if (message.currentMinute.localeCompare("HT") == 0 || message.currentMinute.localeCompare("FT") == 0) {
+                    document.getElementById("Selection#" + message.selectionId + "#Ticker").hidden = true;
+                }
+                if (message.currentMinute.localeCompare("46") == 0) {
+                    document.getElementById("Selection#" + message.selectionId + "#Ticker").hidden = false;
+                }
+            }
+        });
+
+        connection.on("SelectionScoresChanged", (message) => {
+            var currentMinute = document.getElementById("Selection#" + message.selectionId + "#CurrentMinute").innerHTML;
+            var compare = currentMinute.localeCompare("Canceled");
+            if (compare != 0) {
+                document.getElementById("Selection#" + message.selectionId + "#HomeClubScore").innerHTML = message.homeClubScore;
+                document.getElementById("Selection#" + message.selectionId + "#AwayClubScore").innerHTML = message.awayClubScore;
+            }
+        });
+
+        connection.on("SelectionResultChanged", (message) => {
+            document.getElementById("Selection#" + message.selectionId + "#Result").innerHTML = message.resultName;
+        });
+
+        connection.on("SelectionStatusChanged", (message) => {
+            // not implemented, we use the SelectionCanceled and SelectionCurrentMinuteChanged events to visualize
+            // "status" changes of the Selection on the client
+        });
+
+        connection.on("BetStatusChanged", (message) => {
+            var betStatusElement = document.getElementById("Bet#" + message.betId + "#Status");
+            if (betStatusElement.tagName == 'DIV')
+            {
+                betStatusElement.innerHTML = message.statusName;
+            }
+            else if (betStatusElement.tagName == 'INPUT')
+            {
+                betStatusElement.value = message.statusName;
+            }
+
+            if (message.statusName.localeCompare("Completed") == 0)
+            {
+                document.getElementById("Bet#" + message.betId + "#DummyResult").hidden = true;
+                document.getElementById("Bet#" + message.betId + "#Result").hidden = false;
+            }
+            if (message.statusName.localeCompare("Canceled") == 0) {
+                document.getElementById("Bet#" + message.betId + "#TotalOdd").hidden = true;
+                document.getElementById("Bet#" + message.betId + "#InitialTotalOdd").hidden = false;
+                document.getElementById("Bet#" + message.betId + "#PotentialWinnings").hidden = true;
+                document.getElementById("Bet#" + message.betId + "#InitialPotentialWinnings").hidden = false;
+                document.getElementById("Bet#" + message.betId + "#PotentialProfit").hidden = true;
+                document.getElementById("Bet#" + message.betId + "#InitialPotentialProfit").hidden = false;
+            }
+        });
+
+        connection.on("BetResultChanged", (message) => {
+            var betResultElement = document.getElementById("Bet#" + message.betId + "#Result");
+            if (betResultElement.tagName == 'DIV') {
+                betResultElement.innerHTML = message.resultName;
+            }
+            else if (betResultElement.tagName == 'INPUT') {
+                betResultElement.value = message.resultName;
+            }
+        });
+
+        connection.on("BetCancelableStatusChanged", (message) => {
+            if (message.isCancelable)
+            {
+                document.getElementById("Bet#" + message.betId + "#NotCancelableLabel").hidden = true;
+                document.getElementById("Bet#" + message.betId + "#CancelButton").disabled = false;
+                document.getElementById("Bet#" + message.betId + "#CancelButton").hidden = false;
+            }
+            else
+            {
+                document.getElementById("Bet#" + message.betId + "#CancelButton").disabled = true;
+                document.getElementById("Bet#" + message.betId + "#CancelButton").hidden = true;
+                document.getElementById("Bet#" + message.betId + "#NotCancelableLabel").hidden = false;
+            }
+        });
+
+        connection.on("BetDetailsChanged", (message) => {
+            var betTotalOddElement = document.getElementById("Bet#" + message.betId + "#TotalOdd");
+            if (betTotalOddElement.tagName == 'DIV')
+            {
+                betTotalOddElement.innerHTML = message.totalOdd;
+            }
+            else if (betTotalOddElement.tagName == 'INPUT')
+            {
+                betTotalOddElement.value = message.totalOdd;
+            }
+
+            var betPotentialWinningsElement = document.getElementById("Bet#" + message.betId + "#PotentialWinnings");
+            if (betPotentialWinningsElement.tagName == 'DIV') {
+                betPotentialWinningsElement.innerHTML = message.potentialWinnings;
+            }
+            else if (betPotentialWinningsElement.tagName == 'INPUT') {
+                betPotentialWinningsElement.value = message.potentialWinnings + " €";
+            }
+
+            var betPotentialProfitElement = document.getElementById("Bet#" + message.betId + "#PotentialProfit");
+            if (betPotentialProfitElement.tagName == 'DIV') {
+                betPotentialProfitElement.innerHTML = message.potentialProfit;
+            }
+            else if (betPotentialProfitElement.tagName == 'INPUT') {
+                betPotentialProfitElement.value = message.potentialProfit + " €";
+            }
+        });
+    }
+
+</script>

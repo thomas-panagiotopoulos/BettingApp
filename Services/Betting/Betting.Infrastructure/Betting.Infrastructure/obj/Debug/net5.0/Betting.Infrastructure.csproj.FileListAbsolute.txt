@@ -1,0 +1,15 @@
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\Betting\Betting.Infrastructure\Betting.Infrastructure\bin\Debug\net5.0\Betting.Domain.dll
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\Betting\Betting.Infrastructure\Betting.Infrastructure\obj\Debug\net5.0\Betting.Infrastructure.csprojAssemblyReference.cache
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\Betting\Betting.Infrastructure\Betting.Infrastructure\obj\Debug\net5.0\Betting.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\Betting\Betting.Infrastructure\Betting.Infrastructure\obj\Debug\net5.0\Betting.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\Betting\Betting.Infrastructure\Betting.Infrastructure\obj\Debug\net5.0\Betting.Infrastructure.AssemblyInfo.cs
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\Betting\Betting.Infrastructure\Betting.Infrastructure\bin\Debug\net5.0\Betting.Infrastructure.deps.json
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\Betting\Betting.Infrastructure\Betting.Infrastructure\bin\Debug\net5.0\Betting.Infrastructure.dll
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\Betting\Betting.Infrastructure\Betting.Infrastructure\bin\Debug\net5.0\ref\Betting.Infrastructure.dll
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\Betting\Betting.Infrastructure\Betting.Infrastructure\bin\Debug\net5.0\Betting.Infrastructure.pdb
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\Betting\Betting.Infrastructure\Betting.Infrastructure\bin\Debug\net5.0\Betting.Domain.pdb
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\Betting\Betting.Infrastructure\Betting.Infrastructure\obj\Debug\net5.0\Betting.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\Betting\Betting.Infrastructure\Betting.Infrastructure\obj\Debug\net5.0\Betting.Infrastructure.csproj.CopyComplete
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\Betting\Betting.Infrastructure\Betting.Infrastructure\obj\Debug\net5.0\Betting.Infrastructure.dll
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\Betting\Betting.Infrastructure\Betting.Infrastructure\obj\Debug\net5.0\ref\Betting.Infrastructure.dll
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\Betting\Betting.Infrastructure\Betting.Infrastructure\obj\Debug\net5.0\Betting.Infrastructure.pdb

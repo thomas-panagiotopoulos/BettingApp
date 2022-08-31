@@ -1,0 +1,192 @@
+﻿.betslip-selections {
+    height: 82.5%;
+    width: 40%;
+    position: fixed;
+    z-index: 1;
+    top: 14%;
+    left: 0;
+    padding: 5px;
+    color: white;
+    background-color: #5f5f5f;
+    border: 1px solid black;
+    border-collapse: collapse;
+    overflow-x: hidden;
+}
+
+.betslip-selections-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 6.5%;
+    width: 100%;
+    text-align: center;
+    background-color: #212121;
+    font-weight: bolder;
+    padding-top: 5px;
+}
+
+.betslip-selections-list {
+    position: absolute;
+    top: 6.5%;
+    left: 0;
+    height: 93.5%;
+    width: 100%;
+    
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+    .betslip-selections-list table {
+        margin: 5px 20px 5px 50px;
+    }
+
+.betslip-panel {
+    height: 82.5%;
+    width: 60%;
+    position: fixed;
+    z-index: 1;
+    top: 14%;
+    right: 0;
+    padding: 5px;
+    color: white;
+    background-color: #5f5f5f;
+    border: 1px solid black;
+    border-collapse: collapse;
+    overflow-x: hidden;
+}
+
+.betslip-panel-label {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 6.5%;
+    width: 100%;
+    text-align: center;
+    background-color: #212121;
+    font-weight: bolder;
+    padding-top: 5px;
+}
+
+.betslip-panel-content {
+    position: absolute;
+    top: 6.5%;
+    right: 0;
+    width: 100%;
+    height: 93.5%;
+    display: grid;
+    grid-template-columns: 180px 120px 120px 120px;
+    padding: 20px 10px 10px 50px;
+}
+
+.betslip-panel-content input {
+    background-color: #6e6e6e;
+    color: white;
+    width: 90px;
+    height: 30px;
+}
+
+.betslip-panel-update-wagered-amount-form {
+    grid-column-start: 1;
+    grid-column-end: 4;
+}
+
+.betslip-panel-update-wagered-amount-form label{
+    margin-right: 50px;
+}
+
+.betslip-panel-update-wagered-amount-form input {
+    margin-right: 25px;
+}
+
+.betslip-panel-checkout-form {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    text-align: left;
+}
+
+.betslip-panel-betable-status-label{
+    color: hotpink;
+    text-align: center;
+}
+
+.betslip-checkout-success-section {
+    position: fixed;
+    height: 82.5%;
+    width: 100%;
+    z-index: 1;
+    top: 14%;
+    left: 0;
+    padding: 10px;
+    color: white;
+    background-color: #5f5f5f;
+    border: 1px solid black;
+    border-collapse: collapse;
+    overflow: hidden;
+}
+
+.betslip-checkout-success-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 6.5%;
+    width: 100%;
+    text-align: center;
+    background-color: #212121;
+    font-weight: bolder;
+    padding-top: 5px;
+}
+
+.betslip-checkout-success-content {
+    position: absolute;
+    top: 6.5%;
+    left: 0;
+    height: 93.5%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 25% auto 25%;
+    grid-template-rows: 25% auto 25%;
+    grid-gap: 2px;
+}
+
+.betslip-checkout-success-content-centered-item {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    background-color: #444444;
+    border-radius: 5px;
+    border: 1px solid black;
+    padding: 8px;
+}
+
+.betslip-checkout-success-content-centered-item h4 {
+    position: relative;
+    top: 5px;
+    display: inline;
+}
+
+
+.betslip-checkout-error-icon {
+    display: inline;
+    margin-left: 5px;
+    width: 50px;
+    height: 50px;
+}
+
+.betslip-checkout-success-icon {
+    display: inline;
+    margin-left: 10px;
+    width: 40px;
+    height: 40px;
+}
+
+.betslip-checkout-warning-icon {
+    display: inline;
+    margin-left: 10px;
+    width: 40px;
+    height: 40px;
+}
+
+.betslip-checkout-success-content-centered-item p {
+    margin-top: 20px;
+}

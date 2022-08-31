@@ -1,0 +1,62 @@
+﻿@page "{handler?}"
+@model BettingApp.WebApps.WebRazorPages.Pages.Betslip.CheckoutSuccessModel
+@{
+}
+
+@section UserBar{
+
+    <partial name="_UserBar" />
+}
+
+<div class="betslip-checkout-success-section">
+
+    <label class="betslip-checkout-success-label">Betslip Checkout</label>
+
+    <div class="betslip-checkout-success-content">
+        <div class="betslip-checkout-success-content-centered-item">
+            @if (!Model.RequestIdValid)
+            {
+                <h4>Request ID not valid</h4>
+                <img src="~/error-icon.png" alt="Error" class="betslip-checkout-error-icon"/>
+                <p>
+                    The provided request ID is not valid.
+                </p>
+            }
+            else if (!Model.RequestFound)
+            {
+                <h4>Request ID not found</h4>
+                <img src="~/warning-icon.png" alt="Warning" class="betslip-checkout-warning-icon"/>
+                <p>
+                    If you submitted checkout to your Betslip, you can refresh this page in a few minutes,
+                    or wait for a notification about your Betslip checkout outcome.
+                </p>
+                <p>Click <a asp-page="Index">here</a> to return to Index page.</p>
+            }
+            else
+            {
+                <h4>Betslip Checkout Successful</h4>
+                <img src="~/success-icon.png" alt="Success" class="betslip-checkout-success-icon"/>
+                <p>
+                    Your Betslip checkout was succesfully submitted.
+                    You will shortly receive a notification with infromation on your created Bet.
+                </p>
+                <p>Click <a asp-page="/Dashboard/Bets/Index">here</a> to go to your Bets page.</p>
+            }
+        </div>
+    </div>
+
+</div>
+
+@if (!Model.RequestIdValid)
+{
+    <div>Invalid Request Id</div>
+}
+else if (!Model.RequestFound)
+{
+    <div>Request not found</div>
+}
+else
+{
+    <div>Checkout Success!</div>
+    <p>You will shortly be notified about the Checkout result with a notification</p>
+}

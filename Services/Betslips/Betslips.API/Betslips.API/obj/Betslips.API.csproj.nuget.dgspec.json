@@ -1,0 +1,492 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\thoma\\Dropbox\\CEID\\Διπλωματική\\BettingApp\\Services\\Betslips\\Betslips.API\\Betslips.API\\Betslips.API.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\thoma\\Dropbox\\CEID\\Διπλωματική\\BettingApp\\BuildingBlocks\\EventBus\\EventBusRabbitMQ\\EventBusRabbitMQ\\EventBusRabbitMQ.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\thoma\\Dropbox\\CEID\\Διπλωματική\\BettingApp\\BuildingBlocks\\EventBus\\EventBusRabbitMQ\\EventBusRabbitMQ\\EventBusRabbitMQ.csproj",
+        "projectName": "EventBusRabbitMQ",
+        "projectPath": "C:\\Users\\thoma\\Dropbox\\CEID\\Διπλωματική\\BettingApp\\BuildingBlocks\\EventBus\\EventBusRabbitMQ\\EventBusRabbitMQ\\EventBusRabbitMQ.csproj",
+        "packagesPath": "C:\\Users\\thoma\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\thoma\\Dropbox\\CEID\\Διπλωματική\\BettingApp\\BuildingBlocks\\EventBus\\EventBusRabbitMQ\\EventBusRabbitMQ\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\thoma\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "C:\\Users\\thoma\\Dropbox\\CEID\\Διπλωματική\\BettingApp\\BuildingBlocks\\EventBus\\EventBus\\EventBus\\EventBus.csproj": {
+                "projectPath": "C:\\Users\\thoma\\Dropbox\\CEID\\Διπλωματική\\BettingApp\\BuildingBlocks\\EventBus\\EventBus\\EventBus\\EventBus.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Autofac": {
+              "target": "Package",
+              "version": "[6.2.0, )"
+            },
+            "Microsoft.Extensions.Logging": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            },
+            "Polly": {
+              "target": "Package",
+              "version": "[7.2.2, )"
+            },
+            "RabbitMQ.Client": {
+              "target": "Package",
+              "version": "[6.2.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\thoma\\Dropbox\\CEID\\Διπλωματική\\BettingApp\\BuildingBlocks\\EventBus\\EventBus\\EventBus\\EventBus.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\thoma\\Dropbox\\CEID\\Διπλωματική\\BettingApp\\BuildingBlocks\\EventBus\\EventBus\\EventBus\\EventBus.csproj",
+        "projectName": "EventBus",
+        "projectPath": "C:\\Users\\thoma\\Dropbox\\CEID\\Διπλωματική\\BettingApp\\BuildingBlocks\\EventBus\\EventBus\\EventBus\\EventBus.csproj",
+        "packagesPath": "C:\\Users\\thoma\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\thoma\\Dropbox\\CEID\\Διπλωματική\\BettingApp\\BuildingBlocks\\EventBus\\EventBus\\EventBus\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\thoma\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\thoma\\Dropbox\\CEID\\Διπλωματική\\BettingApp\\BuildingBlocks\\EventBus\\IntegrationEventLogEF\\IntegrationEventLogEF\\IntegrationEventLogEF.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\thoma\\Dropbox\\CEID\\Διπλωματική\\BettingApp\\BuildingBlocks\\EventBus\\IntegrationEventLogEF\\IntegrationEventLogEF\\IntegrationEventLogEF.csproj",
+        "projectName": "IntegrationEventLogEF",
+        "projectPath": "C:\\Users\\thoma\\Dropbox\\CEID\\Διπλωματική\\BettingApp\\BuildingBlocks\\EventBus\\IntegrationEventLogEF\\IntegrationEventLogEF\\IntegrationEventLogEF.csproj",
+        "packagesPath": "C:\\Users\\thoma\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\thoma\\Dropbox\\CEID\\Διπλωματική\\BettingApp\\BuildingBlocks\\EventBus\\IntegrationEventLogEF\\IntegrationEventLogEF\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\thoma\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "C:\\Users\\thoma\\Dropbox\\CEID\\Διπλωματική\\BettingApp\\BuildingBlocks\\EventBus\\EventBus\\EventBus\\EventBus.csproj": {
+                "projectPath": "C:\\Users\\thoma\\Dropbox\\CEID\\Διπλωματική\\BettingApp\\BuildingBlocks\\EventBus\\EventBus\\EventBus\\EventBus.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.Relational": {
+              "target": "Package",
+              "version": "[5.0.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.8, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\thoma\\Dropbox\\CEID\\Διπλωματική\\BettingApp\\Services\\Betslips\\Betslips.API\\Betslips.API\\Betslips.API.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\thoma\\Dropbox\\CEID\\Διπλωματική\\BettingApp\\Services\\Betslips\\Betslips.API\\Betslips.API\\Betslips.API.csproj",
+        "projectName": "Betslips.API",
+        "projectPath": "C:\\Users\\thoma\\Dropbox\\CEID\\Διπλωματική\\BettingApp\\Services\\Betslips\\Betslips.API\\Betslips.API\\Betslips.API.csproj",
+        "packagesPath": "C:\\Users\\thoma\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\thoma\\Dropbox\\CEID\\Διπλωματική\\BettingApp\\Services\\Betslips\\Betslips.API\\Betslips.API\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\thoma\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "C:\\Users\\thoma\\Dropbox\\CEID\\Διπλωματική\\BettingApp\\BuildingBlocks\\EventBus\\EventBusRabbitMQ\\EventBusRabbitMQ\\EventBusRabbitMQ.csproj": {
+                "projectPath": "C:\\Users\\thoma\\Dropbox\\CEID\\Διπλωματική\\BettingApp\\BuildingBlocks\\EventBus\\EventBusRabbitMQ\\EventBusRabbitMQ\\EventBusRabbitMQ.csproj"
+              },
+              "C:\\Users\\thoma\\Dropbox\\CEID\\Διπλωματική\\BettingApp\\BuildingBlocks\\EventBus\\IntegrationEventLogEF\\IntegrationEventLogEF\\IntegrationEventLogEF.csproj": {
+                "projectPath": "C:\\Users\\thoma\\Dropbox\\CEID\\Διπλωματική\\BettingApp\\BuildingBlocks\\EventBus\\IntegrationEventLogEF\\IntegrationEventLogEF\\IntegrationEventLogEF.csproj"
+              },
+              "C:\\Users\\thoma\\Dropbox\\CEID\\Διπλωματική\\BettingApp\\Services\\Betslips\\Betslips.Domain\\Betslips.Domain\\Betslips.Domain.csproj": {
+                "projectPath": "C:\\Users\\thoma\\Dropbox\\CEID\\Διπλωματική\\BettingApp\\Services\\Betslips\\Betslips.Domain\\Betslips.Domain\\Betslips.Domain.csproj"
+              },
+              "C:\\Users\\thoma\\Dropbox\\CEID\\Διπλωματική\\BettingApp\\Services\\Betslips\\Betslips.Infrastructure\\Betslips.Infrastructure\\Betslips.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\thoma\\Dropbox\\CEID\\Διπλωματική\\BettingApp\\Services\\Betslips\\Betslips.Infrastructure\\Betslips.Infrastructure\\Betslips.Infrastructure.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Autofac.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[7.1.0, )"
+            },
+            "FluentValidation": {
+              "target": "Package",
+              "version": "[10.3.3, )"
+            },
+            "FluentValidation.DependencyInjectionExtensions": {
+              "target": "Package",
+              "version": "[10.3.3, )"
+            },
+            "MediatR": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "MediatR.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[5.0.13, )"
+            },
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[5.0.9, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.9, )"
+            },
+            "Microsoft.EntityFrameworkCore.Abstractions": {
+              "target": "Package",
+              "version": "[5.0.9, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.9, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.9, )"
+            },
+            "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
+              "target": "Package",
+              "version": "[1.10.13, )"
+            },
+            "RabbitMQ.Client": {
+              "target": "Package",
+              "version": "[6.2.2, )"
+            },
+            "morelinq": {
+              "target": "Package",
+              "version": "[3.3.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\thoma\\Dropbox\\CEID\\Διπλωματική\\BettingApp\\Services\\Betslips\\Betslips.Domain\\Betslips.Domain\\Betslips.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\thoma\\Dropbox\\CEID\\Διπλωματική\\BettingApp\\Services\\Betslips\\Betslips.Domain\\Betslips.Domain\\Betslips.Domain.csproj",
+        "projectName": "Betslips.Domain",
+        "projectPath": "C:\\Users\\thoma\\Dropbox\\CEID\\Διπλωματική\\BettingApp\\Services\\Betslips\\Betslips.Domain\\Betslips.Domain\\Betslips.Domain.csproj",
+        "packagesPath": "C:\\Users\\thoma\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\thoma\\Dropbox\\CEID\\Διπλωματική\\BettingApp\\Services\\Betslips\\Betslips.Domain\\Betslips.Domain\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\thoma\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "MediatR": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "morelinq": {
+              "target": "Package",
+              "version": "[3.3.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\thoma\\Dropbox\\CEID\\Διπλωματική\\BettingApp\\Services\\Betslips\\Betslips.Infrastructure\\Betslips.Infrastructure\\Betslips.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\thoma\\Dropbox\\CEID\\Διπλωματική\\BettingApp\\Services\\Betslips\\Betslips.Infrastructure\\Betslips.Infrastructure\\Betslips.Infrastructure.csproj",
+        "projectName": "Betslips.Infrastructure",
+        "projectPath": "C:\\Users\\thoma\\Dropbox\\CEID\\Διπλωματική\\BettingApp\\Services\\Betslips\\Betslips.Infrastructure\\Betslips.Infrastructure\\Betslips.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\thoma\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\thoma\\Dropbox\\CEID\\Διπλωματική\\BettingApp\\Services\\Betslips\\Betslips.Infrastructure\\Betslips.Infrastructure\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\thoma\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "C:\\Users\\thoma\\Dropbox\\CEID\\Διπλωματική\\BettingApp\\Services\\Betslips\\Betslips.Domain\\Betslips.Domain\\Betslips.Domain.csproj": {
+                "projectPath": "C:\\Users\\thoma\\Dropbox\\CEID\\Διπλωματική\\BettingApp\\Services\\Betslips\\Betslips.Domain\\Betslips.Domain\\Betslips.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.9, )"
+            },
+            "Microsoft.EntityFrameworkCore.Relational": {
+              "target": "Package",
+              "version": "[5.0.9, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

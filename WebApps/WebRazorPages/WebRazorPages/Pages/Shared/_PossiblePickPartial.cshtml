@@ -1,0 +1,34 @@
+﻿@model PossiblePick
+
+<form method="post" asp-page="/Betslip/Index" asp-page-handler="RequestAddSelection"
+   asp-route-matchId="@Model.MatchId" asp-route-matchResultId="@Model.MatchResultId"
+   asp-route-returnUrl="@ViewData["ReturnUrl"]">
+
+    <a class="possible-pick-link" href="#" id="Match#@Model.MatchId#Result#@Model.MatchResultAliasName#Link"
+       style="@(Model.IsBetable ? "" : "pointer-events: none")" onclick="@(Model.IsBetable ? "this.parentNode.submit()" : "")">
+        <div class="possible-pick">
+            <div class="possible-pick-odd Match#@Model.MatchId#Odd" 
+                 id="Match#@Model.MatchId#Result#@Model.MatchResultAliasName#Odd"
+                 @((bool)ViewData["matchCompletedOrCanceled"] ? "hidden" : "")>
+                @Model.Odd
+            </div>
+            <div class="possible-pick-initial-odd Match#@Model.MatchId#InitialOdd" 
+                 id="Match#@Model.MatchId#Result#@Model.MatchResultAliasName#InitialOdd"
+                 @((bool)ViewData["matchCompletedOrCanceled"] ? "" : "hidden")>
+                @Model.InitialOdd
+            </div>
+            <br />
+            <div class="possible-pick-requirement">
+                <small>
+                    @(Model.RequirementTypeName.Equals("norequirement") ? "" : Model.RequirementTypeAliasName+": "+ Model.RequiredValue.ToString("G29"))
+                    @(Model.RequirementTypeName.Contains("amount") ? " €" : "")
+                </small>
+            </div>
+            
+        </div>
+    </a>
+
+</form>
+
+
+

@@ -1,0 +1,33 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<label class="dashboard-side-menu-label">Dashboard Menu</label>
+<div class="dashboard-side-menu-content">
+
+    <div class="dashboard-side-menu-item">
+        <form method="get" asp-page="/Dashboard/Account/Index">
+            <button type="submit" class="btn-secondary btn-lg">Account</button>
+        </form>
+    </div>
+
+    <div class="dashboard-side-menu-item">
+        <form method="get" asp-page="/Dashboard/Bets/Index">
+            <button type="submit" class="btn-secondary btn-lg">Bets</button>
+        </form>
+    </div>
+
+    <div class="dashboard-side-menu-item">
+        <form method="get" asp-page="/Dashboard/Wallet/Index">
+            <button type="submit" class="btn-secondary btn-lg">Wallet</button>
+        </form>
+    </div>
+
+    <div class="dashboard-side-menu-item">
+        <form method="get" asp-page="/Dashboard/Notifications/Index">
+            <button type="submit" class="btn-secondary btn-lg">Notifications</button>
+        </form>
+    </div>
+
+</div>

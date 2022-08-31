@@ -1,0 +1,124 @@
+﻿@page
+@model BettingApp.WebApps.WebRazorPages.Pages.Dashboard.Wallet.WithdrawModel
+
+@section UserBar{
+
+    <partial name="_UserBar" />
+}
+
+@section Scripts{
+    <script type="text/javascript">
+        function FormatIBAN() {
+            var iban = document.getElementById("wallet-withdraw-form-iban").value;
+
+            if (iban.length == 1) {
+                iban = iban.replace(/[^G]/g, '');
+            }
+            else if (iban.length == 2) {
+                iban = iban.replace(/[^GR]/g, '');
+            }
+            else if (iban.length > 2) {
+                var letters = iban.substring(1, 2);
+
+                if (letters[0] === 'G' && letters[1] === 'R') {
+                    var numbers = iban.substring(2);
+                    numbers = numbers.replace(/\D+/g, '');
+                    iban = "GR" + numbers;
+                }
+                else if (letters[0] === 'G') {
+                    var numbers = iban.substring(1);
+                    numbers = numbers.replace(/\D+/g, '');
+                    iban = "GR" + numbers;
+                }
+                else {
+                    var numbers = iban.replace(/\D+/g, '');
+                    iban = "GR" + numbers;
+                }
+                if (iban.length > 27)
+                    iban = iban.substring(0, 27);
+
+                if (iban.length > 24) {
+                    iban = [iban.slice(0, 4), " ",
+                            iban.slice(4, 8), " ",
+                            iban.slice(8, 12), " ",
+                            iban.slice(12, 16), " ",
+                            iban.slice(16, 20), " ",
+                            iban.slice(20, 24), " ",
+                            iban.slice(24)].join('');
+                }
+                else if (iban.length > 20) {
+                    iban = [iban.slice(0, 4), " ",
+                            iban.slice(4, 8), " ",
+                            iban.slice(8, 12), " ",
+                            iban.slice(12, 16), " ",
+                            iban.slice(16, 20), " ",
+                            iban.slice(20)].join('');
+                }
+                else if (iban.length > 16) {
+                    iban = [iban.slice(0, 4), " ",
+                            iban.slice(4, 8), " ",
+                            iban.slice(8, 12), " ",
+                            iban.slice(12, 16), " ",
+                            iban.slice(16)].join('');
+                }
+                else if (iban.length > 12) {
+                    iban = [iban.slice(0, 4), " ",
+                            iban.slice(4, 8), " ",
+                            iban.slice(8, 12), " ",
+                            iban.slice(12)].join('');
+                }
+                else if (iban.length > 8) {
+                    iban = [iban.slice(0, 4), " ",
+                            iban.slice(4, 8), " ",
+                            iban.slice(8)].join('');
+                }
+                else if (iban.length > 4) {
+                    iban = [iban.slice(0, 4), " ",
+                            iban.slice(4)].join('');
+                }
+            }
+
+            document.getElementById("wallet-withdraw-form-iban").value = iban;
+        }
+    </script>
+}
+
+<div class="dashboard-side-menu-section">
+    <partial name="_DashboardSideMenu" />
+</div>
+
+<div class="wallet-withdraw-section">
+    <label class="wallet-withdraw-label">Wallet Withdraw</label>
+
+    <div class="wallet-withdraw-panel">
+        <label>Current Balance:</label>
+        <input type="text" value="@(Model.CurrentBalance >= 0 ? Model.CurrentBalance+" €" : "Not available")" readonly />
+        <div></div>
+
+        <form class="wallet-withdraw-form" asp-page="/Dashboard/Wallet/Withdraw" method="post">
+            <label>Withdraw Amount:</label>
+            <input name="WithdrawAmount" type="number" min="0.01" step=".01" placeholder="€" required />
+            <div></div>
+
+            <h4 class="wallet-withdraw-form-payment-info-label">Transfer Information</h4>
+
+            <label>Bank Account IBAN:</label>
+            <input id="wallet-withdraw-form-iban" asp-for="@Model.IBAN" type="text"
+                   pattern="^GR[0-9]{2}( [0-9]{4}){5} [0-9]{3}$" placeholder="GR01 2345 6789 0123 4567 8901 234"
+                   onkeyup="FormatIBAN()" required />
+            <div></div>
+
+            <label>Bank Account Holder:</label>
+            <input asp-for="@Model.BankAccountHolder" type="text" pattern="[a-zA-Z'-'\s]*" maxlength="50" placeholder="Full Name" required />
+            <div></div>
+
+            <input asp-for="@Model.ReturnPage" value="@Model.ReturnPage" hidden />
+            <button type="submit" class="btn-success btn-lg wallet-withdraw-form-button">Submit</button>
+        </form>
+
+        <form method="get" asp-page="/Dashboard/Wallet/Index">
+            <input name="PageNumber" value="@Model.ReturnPage" hidden />
+            <button type="submit" class="btn-secondary wallet-back-button">Back</button>
+        </form>
+    </div>
+</div>

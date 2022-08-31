@@ -1,0 +1,17 @@
+﻿.possible-pick {
+    height: 100px;
+    width: 100px;
+    padding-top: 10px;
+    padding-left: 10px;
+    color: white;
+    background-color: #444444;
+}
+
+.possible-pick:hover {
+    background-color: #696868;
+}
+
+
+a.possible-pick-link:hover {
+    text-decoration: none;
+}

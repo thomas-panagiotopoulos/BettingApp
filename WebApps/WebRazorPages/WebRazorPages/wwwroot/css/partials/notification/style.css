@@ -1,0 +1,29 @@
+﻿.notification {
+    position: relative;
+    display: grid;
+    grid-template-columns: 270px 270px 60px;
+    height: 150px;
+    grid-gap: 1px;
+    padding: 8px;
+    background-color: #444444;
+}
+
+.notification-title {
+    font-weight: bold;
+}
+
+.notification-date {
+    color: lightgrey;
+    text-align: right;
+}
+
+.notification-read-status {
+    color: lightskyblue;
+    text-align: right;
+}
+
+.notification-description {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    overflow-wrap: break-word;
+}

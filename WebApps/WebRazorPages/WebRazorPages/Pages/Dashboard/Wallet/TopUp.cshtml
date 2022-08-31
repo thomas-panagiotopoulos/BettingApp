@@ -1,0 +1,109 @@
+﻿@page
+@model BettingApp.WebApps.WebRazorPages.Pages.Dashboard.Wallet.TopUpModel
+@using System.Globalization 
+
+@section UserBar{
+
+    <partial name="_UserBar" />
+}
+
+@section Scripts{
+    <script type="text/javascript">
+        function FormatCardNumber() {
+            var cardNumber = document.getElementById("wallet-topup-form-credit-card").value;
+
+            cardNumber = cardNumber.replace(/[^0-9]+/g, '');
+
+            var length = cardNumber.length;
+            if (length > 16) {
+                cardNumber = cardNumber.substring(0, length - (length - 16));
+            }
+
+            if (length > 12) {
+                cardNumber = [cardNumber.slice(0, 4), " ",
+                              cardNumber.slice(4, 8), " ",
+                              cardNumber.slice(8, 12), " ",
+                              cardNumber.slice(12)].join('');
+            }
+            else if (length > 8) {
+                cardNumber = [cardNumber.slice(0, 4), " ",
+                              cardNumber.slice(4, 8), " ",
+                              cardNumber.slice(8)].join('');
+            }
+            else if (length > 4) {
+                cardNumber = [cardNumber.slice(0, 4), " ",
+                              cardNumber.slice(4)].join('');
+            }
+
+            document.getElementById("wallet-topup-form-credit-card").value = cardNumber;
+
+        }
+    </script>
+}
+
+<div class="dashboard-side-menu-section">
+    <partial name="_DashboardSideMenu" />
+</div>
+
+<div class="wallet-topup-section">
+    <label class="wallet-topup-label">Wallet Top Up</label>
+
+    <div class="wallet-topup-panel">
+        <label>Current Balance:</label>
+        <input type="text" value="@(Model.CurrentBalance >= 0 ? Model.CurrentBalance+" €" : "Not available")" readonly />
+        <div></div>
+
+        <form class="wallet-topup-form" asp-page="/Dashboard/Wallet/TopUp" method="post">
+            <label>Top Up Amount:</label>
+            <input name="TopUpAmount" type="number" min="0.01" step=".01" placeholder="€" required />
+            <div></div>
+
+            <h4 class="wallet-topup-form-payment-info-label">Payment Information</h4>
+
+            <label>Card Number:</label>
+            <input id="wallet-topup-form-credit-card" asp-for="@Model.Card.CardNumber" type="tel" inputmode="numeric" 
+                   pattern="[0-9\s]{13,19}" autocomplete="cc-number" maxlength="19" placeholder="0123 4567 8901 2345" 
+                   onkeyup="FormatCardNumber()" required>
+            <div></div>
+
+            <label>Cardholder Name:</label>
+            <input asp-for="@Model.Card.CardHolderName" type="text" pattern="[a-zA-Z'-'\s]*" maxlength="50" placeholder="Full Name" required />
+            <div></div>
+
+            <label>Expiration Date:</label>
+            <div class="wallet-topup-form-expiration-date">
+                <select asp-for="@Model.Card.ExpirationDateMM" required>
+                    <option value="">Month</option>
+                    @for (var i = 1; i <= 12; i++)
+                    {
+                        <option value="@i.ToString("00")">
+                            @DateTimeFormatInfo.InvariantInfo.GetMonthName(i)
+                        </option>
+                    }
+                </select>
+                <select asp-for="@Model.Card.ExpirationDateYY" required>
+                    <option value="">Year</option>
+                    @for (var i = 0; i < 12; i++)
+                    {
+                        <option value="@DateTime.UtcNow.AddHours(2).AddYears(i).ToString("yy")">
+                            @DateTime.UtcNow.AddHours(2).AddYears(i).ToString("yyyy")
+                        </option>
+                    }
+                </select>
+            </div>
+            <div></div>
+
+            <label>CVV:</label>
+            <input asp-for="@Model.Card.SecurityNumber" type="tel" pattern="\d*" maxlength="3" placeholder="123" required />
+            <div></div>
+
+            <input asp-for="@Model.ReturnPage" value="@Model.ReturnPage" hidden/>
+            <button type="submit" class="btn-success btn-lg wallet-topup-form-button">Submit</button>
+        </form>
+        
+        <form method="get" asp-page="/Dashboard/Wallet/Index">
+            <input name="PageNumber" value="@Model.ReturnPage" hidden/>
+            <button type="submit" class="btn-secondary wallet-back-button">Back</button>
+        </form>
+    </div>
+</div>

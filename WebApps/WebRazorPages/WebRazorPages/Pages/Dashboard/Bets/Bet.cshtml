@@ -1,0 +1,120 @@
+﻿@page "{handler?}"
+@model BettingApp.WebApps.WebRazorPages.Pages.Dashboard.Bets.BetModel
+
+@section UserBar{
+
+    <partial name="_UserBar" />
+}
+
+@section Scripts{
+    <partial name="_CurrentMinuteTickerScript" />
+    <partial name="_BettingSignalrHubScript" />
+}
+
+<div class="dashboard-side-menu-section">
+    <partial name="_DashboardSideMenu" />
+</div>
+
+<div class="bet-section">
+
+    <label class="bet-details-label">
+        Bet Details
+    </label>
+
+    <label class="bet-selections-label">
+        Bet Selections
+    </label>
+
+    <div class="bet-details">
+        @if (Model.Bet != null)
+        {
+            <label>Bet ID: </label>
+            <input value="@Model.Bet.Id" readonly />
+
+            <label>Creation Date: </label>
+            <input value="@Model.Bet.DateTimeCreated.ToString("dd/MM/yyyy")" readonly />
+
+            <label>Status: </label>
+            <input id="Bet#@Model.Bet.Id#Status" value="@Model.Bet.StatusName" readonly />
+
+            <label>Outcome: </label>
+            <div>
+                <input id="Bet#@Model.Bet.Id#Result" value="@Model.Bet.ResultName" readonly
+                       @(Model.Bet.StatusName.Equals("Completed") ? "" : "hidden") />
+                <input id="Bet#@Model.Bet.Id#DummyResult" value="-" readonly
+                       @(Model.Bet.StatusName.Equals("Completed") ? "hidden" : "") />
+            </div>
+
+            <label>Selections: </label>
+            <input value="@Model.Bet.Selections?.Count" readonly />
+
+            <label>Total Odd: </label>
+            <input id="Bet#@Model.Bet.Id#TotalOdd" value="@Model.Bet.TotalOdd" readonly
+                   @(Model.Bet.StatusName.Equals("Canceled") ? "hidden" : "")/>
+            <input id="Bet#@Model.Bet.Id#InitialTotalOdd" value="@Model.Bet.InitialTotalOdd" readonly 
+                   @(Model.Bet.StatusName.Equals("Canceled") ? "" : "hidden")/>
+
+            <label>Wagered Amount: </label>
+            <input value="@Model.Bet.WageredAmount €" readonly />
+
+            <label>Winnings: </label>
+            <input id="Bet#@Model.Bet.Id#PotentialWinnings" value="@Model.Bet.PotentialWinnings €" readonly 
+                   @(Model.Bet.StatusName.Equals("Canceled") ? "hidden" : "")/>
+            <input id="Bet#@Model.Bet.Id#InitialPotentialWinnings" value="@Model.Bet.InitialPotentialWinnings €" readonly 
+                   @(Model.Bet.StatusName.Equals("Canceled") ? "" : "hidden")/>
+
+            <label>Profit: </label>
+            <input id="Bet#@Model.Bet.Id#PotentialProfit" value="@Model.Bet.PotentialProfit €" readonly 
+                   @(Model.Bet.StatusName.Equals("Canceled") ? "hidden" : "")/>
+            <input id="Bet#@Model.Bet.Id#InitialPotentialProfit" value="@Model.Bet.InitialPotentialProfit €" readonly 
+                   @(Model.Bet.StatusName.Equals("Canceled") ? "" : "hidden")/>
+
+
+            <form asp-page="/Dashboard/Bets/Index" asp-route-ReturnPage="@Model.ReturnPage" method="get">
+                <button type="submit" class="btn-secondary">Back</button>
+            </form>
+            <div class="cancel-bet-tile">
+
+                <div id="Bet#@Model.Bet.Id#NotCancelableLabel" class="bet-cancelable-status"
+                     @(Model.Bet.IsCancelable ? "hidden" : "")>
+                    Not Cancelable
+                </div>
+
+                <form asp-page="/Dashboard/Bets/Bet" asp-page-handler="CancelBet" asp-route-id="@Model.Bet.Id"
+                      asp-route-returnPage="@Model.ReturnPage" method="post">
+                    <button id="Bet#@Model.Bet.Id#CancelButton" type="submit" class="btn-danger"
+                            @(!Model.Bet.IsCancelable ? "disabled hidden" : "")>
+                        Cancel
+                    </button>
+                </form>
+
+            </div>
+        }
+        else
+        {
+            <div class="centered-content-container">
+                <div class="centered-content-item">
+                    Bet not found
+                </div>
+            </div>
+        }
+
+    </div>
+
+    <div class="bet-selections">
+        @if (Model.Bet != null)
+        {
+            <table>
+                @foreach (var selection in Model.Bet.Selections)
+                {
+                    <tr>
+                        <td>
+                            <partial name="_BetSelectionPartial" model="@selection" />
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+    </div>
+
+</div>

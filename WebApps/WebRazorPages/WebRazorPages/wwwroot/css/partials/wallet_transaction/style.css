@@ -1,0 +1,26 @@
+﻿.wallet-transaction {
+    position: relative;
+    display: grid;
+    grid-template-columns: 130px 320px;
+    grid-gap: 1px;
+    width: 100%;
+    padding: 5px;
+    background-color: #444444;
+    font-size: 15px;
+}
+
+.wallet-transaction input {
+    background-color: #6e6e6e;
+    color: white;
+    width: 75px;
+    height: 25px;
+}
+
+.wallet-transaction label {
+    font-weight: bold;
+}
+
+.wallet-transaction-reference-id {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}

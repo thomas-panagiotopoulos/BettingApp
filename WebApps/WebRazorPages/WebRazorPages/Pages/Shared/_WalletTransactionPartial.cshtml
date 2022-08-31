@@ -1,0 +1,20 @@
+﻿@model Transaction
+
+    <div class="wallet-transaction">
+
+        <label>Transaction ID:</label>
+        <div>@Model.Id</div>
+
+        <label>Date:</label>
+        <div>@Model.DateTimeCreated.ToString("dd/MM/yyyy HH:mm")</div>
+
+        <label>Type:</label>
+        <div class="wallet-transaction-type">@Model.TransactionTypeName</div>
+
+        <label>Amount:</label>
+        <input type="text" value="@Model.Amount €" readonly />
+
+        <div class="wallet-transaction-reference-id">
+            <small>Reference ID: @Model.IdentifierId</small>
+        </div>
+    </div>

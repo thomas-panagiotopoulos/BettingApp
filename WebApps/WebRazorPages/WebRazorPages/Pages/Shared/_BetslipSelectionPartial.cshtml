@@ -1,0 +1,75 @@
+﻿@model Selection
+@{ 
+    bool displayTicker = !Model.IsCanceled &&
+                         !Model.CurrentMinute.Equals("0") &&
+                         !Model.CurrentMinute.Equals("HT") &&
+                         !Model.CurrentMinute.Equals("FT");
+}
+
+<div class="betslip-selection">
+    <div class="betslip-selection-match-id">
+        <strong>@Model.RelatedMatchId</strong>
+    </div>
+    <div class="betslip-selection-current-minute">
+        <div id="Selection#@Model.Id#CurrentMinute">
+            @if (!Model.IsCanceled)
+            {
+                @(Model.CurrentMinute.Equals("0") ? Model.KickoffDateTime.ToString("MM/dd HH:mm") : Model.CurrentMinute )
+            }
+            else
+            {
+                @("Canceled")
+            }
+        </div>        
+        <div class="current-minute-ticker" id="Selection#@Model.Id#Ticker" @(displayTicker ? "" : "hidden")>'</div>
+    </div>
+    <div class="betslip-selection-gambler-match-result">
+        <strong>Result:</strong> @Model.GamblerMatchResultAliasName
+    </div>
+
+    <div class="betslip-selection-home-club-name">
+        @Model.HomeClubName
+    </div>
+    <div class="betslip-selection-home-club-score" id="Selection#@Model.Id#HomeClubScore">
+        @(Model.CurrentMinute.Equals("0") || Model.IsCanceled ? "-" : Model.HomeClubScore)
+    </div>
+    <div class="betslip-selection-odd">
+        <strong>Odd: </strong>
+        <div id="Selection#@Model.Id#Odd" @(Model.CurrentMinute.Equals("FT") || Model.IsCanceled ? "hidden" : "")>
+            @Model.Odd
+        </div>
+        <div id="Selection#@Model.Id#InitialOdd" @(Model.CurrentMinute.Equals("FT") || Model.IsCanceled ? "" : "hidden")>
+            @Model.InitialOdd
+        </div>
+    </div>
+
+    <div class="betslip-selection-away-club-name">
+        @Model.AwayClubName
+    </div>
+    <div class="betslip-selection-away-club-score" id="Selection#@Model.Id#AwayClubScore">
+        @(Model.CurrentMinute.Equals("0") || Model.IsCanceled ? "-" : Model.AwayClubScore)
+    </div>
+    <div class="betslip-selection-requirement">
+        <small>
+            @if (!Model.RequirementTypeName.Equals("norequirement"))
+            {
+                @(Model.RequirementTypeAliasName + ": " + Model.RequiredValue.ToString("G29"))
+                @(Model.RequirementTypeName.Contains("amount") ? " €" : "")
+            }
+        </small>
+    </div>
+
+    <form class="betslip-selection-remove-form" method="post" 
+          asp-page="/Betslip/Index" asp-page-handler="RemoveSelection" 
+          asp-route-selectionId="@Model.Id" asp-route-returnUrl="@ViewData["ReturnUrl"]">
+        <button type="submit" class="btn-secondary btn-sm">Remove</button>
+    </form>
+
+    <div class="betslip-selection-betable-status" id="Selection#@Model.Id#BetableStatus">
+        @if (!Model.IsBetable)
+        {
+            @("Not Betable")
+        }
+    </div>
+</div>
+

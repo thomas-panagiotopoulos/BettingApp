@@ -1,0 +1,61 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model BetPreview
+
+    <div class="bet-preview">
+        <div class="bet-preview-id">
+            <strong>@Model.Id</strong>
+        </div>
+        <div class="bet-preview-datetime-created">
+            @Model.DateTimeCreated.ToString("dd/MM/yyyy")
+        </div>
+        <div class="bet-preview-selections-count">
+            Selections: @Model.SelectionsCount
+        </div>
+
+        <div class="bet-preview-status">
+            <strong>Status: </strong><div id="Bet#@Model.Id#Status">@Model.StatusName</div>
+        </div>
+        <div class="bet-preview-total-odd">
+            <strong>Total Odd: </strong>
+            <div id="Bet#@Model.Id#TotalOdd" @(Model.StatusName.Equals("Canceled") ? "hidden" : "")>@Model.TotalOdd</div>
+            <div id="Bet#@Model.Id#InitialTotalOdd" @(Model.StatusName.Equals("Canceled") ? "" : "hidden")>@Model.InitialTotalOdd</div>
+        </div>
+        <div class="bet-preview-winnings">
+            <strong>Winnings: </strong>
+            <div id="Bet#@Model.Id#PotentialWinnings" @(Model.StatusName.Equals("Canceled") ? "hidden" : "")>
+                @Model.PotentialWinnings
+            </div>
+            <div id="Bet#@Model.Id#InitialPotentialWinnings" @(Model.StatusName.Equals("Canceled") ? "" : "hidden")>
+                @Model.InitialPotentialWinnings
+            </div> €
+        </div>
+
+        <div class="bet-preview-result">
+            <strong>Outcome: </strong>
+            <div id="Bet#@Model.Id#Result" @(Model.StatusName.Equals("Completed") ? "" : "hidden")>@Model.ResultName</div>
+            <div id="Bet#@Model.Id#DummyResult" @(Model.StatusName.Equals("Completed") ? "hidden" : "")>-</div>
+        </div>
+        <div class="bet-preview-wagered-amount">
+            <strong>Wagered Amount: </strong><div id="Bet#@Model.Id#WageredAmount">@Model.WageredAmount</div> €
+        </div>
+        <div class="bet-preview-profit">
+            <strong>Profit: </strong>
+            <div id="Bet#@Model.Id#PotentialProfit" @(Model.StatusName.Equals("Canceled") ? "hidden" : "")>
+                @Model.PotentialProfit
+            </div>
+            <div id="Bet#@Model.Id#InitialPotentialProfit" @(Model.StatusName.Equals("Canceled") ? "" : "hidden")>
+                @Model.InitialPotentialProfit
+            </div> €
+        </div>
+
+        <div class="bet-preview-view-button">
+            <form asp-page="/Dashboard/Bets/Bet" asp-route-id="@Model.Id" asp-route-returnPage="@ViewData["ReturnPage"]"
+                  method="get">
+                <input type="hidden" value="@Model.Id" name="id" />
+                <input type="hidden" value="@ViewData["ReturnPage"]" name="returnPage" />
+                <button type="submit" class="btn-primary btn-sm">View</button>
+            </form>
+        </div>
+    </div>

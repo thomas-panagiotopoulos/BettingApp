@@ -1,0 +1,37 @@
+﻿@page
+@model IdentityServerAspNetIdentity.Pages.RegisterModel
+@{
+    ViewData["Title"] = "Register Page";
+}
+@section Scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
+<h3>Register Page</h3>
+<form asp-route-returnUrl="@Model.ReturnUrl" asp-page="">
+    <div class="form-group">
+        <label asp-for="Input.Email"></label>
+        <input asp-for="Input.Email" />
+        <span asp-validation-for="Input.Email"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Input.Username"></label>
+        <input asp-for="Input.Username" />
+        <span asp-validation-for="Input.Username"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Input.Password"></label>
+        <input asp-for="Input.Password" />
+        <span asp-validation-for="Input.Password"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Input.ConfirmPassword"></label>
+        <input asp-for="Input.ConfirmPassword" />
+        <span asp-validation-for="Input.ConfirmPassword"></span>
+    </div>
+    <button type="submit" class="btn-success">Register</button>
+</form>
+<p>Already a member? <a asp-page="/Auth/Signin" asp-route-returnUrl="@Model.ReturnUrl">Sign In</a></p>
+<form action="~/Index" method="GET">
+    <button type="submit" class="btn btn-primary">Return to Home Page</button>
+</form>

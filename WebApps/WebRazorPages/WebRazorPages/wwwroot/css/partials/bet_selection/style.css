@@ -1,0 +1,14 @@
+﻿.bet-selection {
+    position: relative;
+    display: grid;
+    grid-template-columns: 180px 140px 130px;
+    grid-gap: 1px;
+    width: 100%;
+    height:120px;
+    padding: 8px;
+    background-color: #444444;
+}
+
+.bet-selection div{
+    display: inline;
+}

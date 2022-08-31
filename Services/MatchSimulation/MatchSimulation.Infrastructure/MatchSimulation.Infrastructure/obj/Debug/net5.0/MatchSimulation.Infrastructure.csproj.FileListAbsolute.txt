@@ -1,0 +1,15 @@
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\MatchSimulation\MatchSimulation.Infrastructure\MatchSimulation.Infrastructure\bin\Debug\net5.0\MatchSimulation.Domain.dll
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\MatchSimulation\MatchSimulation.Infrastructure\MatchSimulation.Infrastructure\obj\Debug\net5.0\MatchSimulation.Infrastructure.csprojAssemblyReference.cache
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\MatchSimulation\MatchSimulation.Infrastructure\MatchSimulation.Infrastructure\obj\Debug\net5.0\MatchSimulation.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\MatchSimulation\MatchSimulation.Infrastructure\MatchSimulation.Infrastructure\obj\Debug\net5.0\MatchSimulation.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\MatchSimulation\MatchSimulation.Infrastructure\MatchSimulation.Infrastructure\obj\Debug\net5.0\MatchSimulation.Infrastructure.AssemblyInfo.cs
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\MatchSimulation\MatchSimulation.Infrastructure\MatchSimulation.Infrastructure\bin\Debug\net5.0\MatchSimulation.Infrastructure.deps.json
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\MatchSimulation\MatchSimulation.Infrastructure\MatchSimulation.Infrastructure\bin\Debug\net5.0\MatchSimulation.Infrastructure.dll
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\MatchSimulation\MatchSimulation.Infrastructure\MatchSimulation.Infrastructure\bin\Debug\net5.0\ref\MatchSimulation.Infrastructure.dll
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\MatchSimulation\MatchSimulation.Infrastructure\MatchSimulation.Infrastructure\bin\Debug\net5.0\MatchSimulation.Infrastructure.pdb
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\MatchSimulation\MatchSimulation.Infrastructure\MatchSimulation.Infrastructure\bin\Debug\net5.0\MatchSimulation.Domain.pdb
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\MatchSimulation\MatchSimulation.Infrastructure\MatchSimulation.Infrastructure\obj\Debug\net5.0\MatchSimulation.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\MatchSimulation\MatchSimulation.Infrastructure\MatchSimulation.Infrastructure\obj\Debug\net5.0\MatchSimulation.Infrastructure.csproj.CopyComplete
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\MatchSimulation\MatchSimulation.Infrastructure\MatchSimulation.Infrastructure\obj\Debug\net5.0\MatchSimulation.Infrastructure.dll
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\MatchSimulation\MatchSimulation.Infrastructure\MatchSimulation.Infrastructure\obj\Debug\net5.0\ref\MatchSimulation.Infrastructure.dll
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\MatchSimulation\MatchSimulation.Infrastructure\MatchSimulation.Infrastructure\obj\Debug\net5.0\MatchSimulation.Infrastructure.pdb

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "PZ99KgjQwLy1WL0KVaBDUOXXtK/1gZ3NO8NfScFa4k68YOw/MJoskmF+A00NmO0aI3i17wQyHboS2qzXYT9dGA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\thoma\\Dropbox\\CEID\\Διπλωματική\\BettingApp\\Services\\MatchSimulation\\MatchSimulation.Domain\\MatchSimulation.Domain\\MatchSimulation.Domain.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\thoma\\.nuget\\packages\\mediatr\\9.0.0\\mediatr.9.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

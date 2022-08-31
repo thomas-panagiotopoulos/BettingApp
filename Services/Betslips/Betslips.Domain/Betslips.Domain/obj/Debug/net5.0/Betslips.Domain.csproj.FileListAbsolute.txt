@@ -1,0 +1,12 @@
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\Betslips\Betslips.Domain\Betslips.Domain\bin\Debug\net5.0\Betslips.Domain.deps.json
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\Betslips\Betslips.Domain\Betslips.Domain\bin\Debug\net5.0\Betslips.Domain.dll
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\Betslips\Betslips.Domain\Betslips.Domain\bin\Debug\net5.0\ref\Betslips.Domain.dll
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\Betslips\Betslips.Domain\Betslips.Domain\bin\Debug\net5.0\Betslips.Domain.pdb
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\Betslips\Betslips.Domain\Betslips.Domain\obj\Debug\net5.0\Betslips.Domain.csprojAssemblyReference.cache
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\Betslips\Betslips.Domain\Betslips.Domain\obj\Debug\net5.0\Betslips.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\Betslips\Betslips.Domain\Betslips.Domain\obj\Debug\net5.0\Betslips.Domain.AssemblyInfoInputs.cache
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\Betslips\Betslips.Domain\Betslips.Domain\obj\Debug\net5.0\Betslips.Domain.AssemblyInfo.cs
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\Betslips\Betslips.Domain\Betslips.Domain\obj\Debug\net5.0\Betslips.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\Betslips\Betslips.Domain\Betslips.Domain\obj\Debug\net5.0\Betslips.Domain.dll
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\Betslips\Betslips.Domain\Betslips.Domain\obj\Debug\net5.0\ref\Betslips.Domain.dll
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\Betslips\Betslips.Domain\Betslips.Domain\obj\Debug\net5.0\Betslips.Domain.pdb

@@ -1,0 +1,15 @@
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\Betslips\Betslips.Infrastructure\Betslips.Infrastructure\bin\Debug\net5.0\Betslips.Infrastructure.deps.json
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\Betslips\Betslips.Infrastructure\Betslips.Infrastructure\bin\Debug\net5.0\Betslips.Infrastructure.dll
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\Betslips\Betslips.Infrastructure\Betslips.Infrastructure\bin\Debug\net5.0\ref\Betslips.Infrastructure.dll
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\Betslips\Betslips.Infrastructure\Betslips.Infrastructure\bin\Debug\net5.0\Betslips.Infrastructure.pdb
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\Betslips\Betslips.Infrastructure\Betslips.Infrastructure\bin\Debug\net5.0\Betslips.Domain.dll
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\Betslips\Betslips.Infrastructure\Betslips.Infrastructure\bin\Debug\net5.0\Betslips.Domain.pdb
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\Betslips\Betslips.Infrastructure\Betslips.Infrastructure\obj\Debug\net5.0\Betslips.Infrastructure.csprojAssemblyReference.cache
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\Betslips\Betslips.Infrastructure\Betslips.Infrastructure\obj\Debug\net5.0\Betslips.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\Betslips\Betslips.Infrastructure\Betslips.Infrastructure\obj\Debug\net5.0\Betslips.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\Betslips\Betslips.Infrastructure\Betslips.Infrastructure\obj\Debug\net5.0\Betslips.Infrastructure.AssemblyInfo.cs
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\Betslips\Betslips.Infrastructure\Betslips.Infrastructure\obj\Debug\net5.0\Betslips.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\Betslips\Betslips.Infrastructure\Betslips.Infrastructure\obj\Debug\net5.0\Betslips.Infrastructure.csproj.CopyComplete
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\Betslips\Betslips.Infrastructure\Betslips.Infrastructure\obj\Debug\net5.0\Betslips.Infrastructure.dll
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\Betslips\Betslips.Infrastructure\Betslips.Infrastructure\obj\Debug\net5.0\ref\Betslips.Infrastructure.dll
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\Betslips\Betslips.Infrastructure\Betslips.Infrastructure\obj\Debug\net5.0\Betslips.Infrastructure.pdb

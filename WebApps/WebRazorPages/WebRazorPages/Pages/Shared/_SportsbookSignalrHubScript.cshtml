@@ -1,0 +1,125 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using Microsoft.Extensions.Options
+@inject IOptions<AppSettings> settings
+
+@{ 
+    string sportsbookSignalrHubUrl;
+
+    if (settings.Value.IsContainerEnv == true)
+    {
+        // If we manage to fix the routing issue when attempting to connect to SignalrHubs through the Ocelot ApiGw,
+        // then we will switch to using the Web.Bff.Gambling Url. Until then, we connect to SignalrHubs directly
+        // from their external Urls.
+        //sportsbookSignalrHubUrl = settings.Value.GamblingUrlExternal;
+        sportsbookSignalrHubUrl = settings.Value.SportsbookSignalrHubUrl;
+
+    }
+    else
+    {
+        sportsbookSignalrHubUrl = settings.Value.SportsbookSignalrHubUrl;
+    }
+}
+<script type="text/javascript">
+
+    stablishSportsbookHubConnection((sportsbookConn) => registerSportsbookHubConnection(sportsbookConn));
+
+    function stablishSportsbookHubConnection(cb) {
+        let connection = new signalR.HubConnectionBuilder()
+            .withUrl('@sportsbookSignalrHubUrl/hub/sportsbookhub')
+            .withAutomaticReconnect()
+            .build();
+
+        connection.start().then(function () {
+            console.log('Connected to Sportsbook Signalr Hub');
+            cb(connection);
+        });
+    }
+
+    function registerSportsbookHubConnection(connection) {
+        connection.on("MatchCanceled", (message) => {
+            document.getElementById("Match#" + message.matchId + "#CurrentMinute").innerHTML = "Canceled";
+            document.getElementById("Match#" + message.matchId + "#Ticker").hidden = true;
+            document.getElementById("Match#" + message.matchId + "#HomeClubScore").innerHTML = "-";
+            document.getElementById("Match#" + message.matchId + "#AwayClubScore").innerHTML = "-";
+
+            var matchOdds = document.getElementsByClassName("Match#" + message.matchId + "#Odd");
+            var matchInitialOdds = document.getElementsByClassName("Match#" + message.matchId + "#InitialOdd");
+
+            for (var i = 0; i < matchOdds.length; i++)
+            {
+                matchOdds[i].hidden = true;
+                matchInitialOdds[i].hidden = false;
+            }
+        });
+
+        connection.on("MatchCurrentMinuteChanged", (message) => {
+            var currentMinute = document.getElementById("Match#" + message.matchId + "#CurrentMinute").innerHTML;
+            var isCanceled = currentMinute.localeCompare("Canceled");
+            var isCompleted = currentMinute.localeCompare("FT");
+            if (isCanceled != 0 && isCompleted != 0)
+            {
+                document.getElementById("Match#" + message.matchId + "#CurrentMinute").innerHTML = message.currentMinute;
+                if (message.currentMinute.localeCompare("1") == 0)
+                {
+                    document.getElementById("Match#" + message.matchId + "#HomeClubScore").innerHTML = 0;
+                    document.getElementById("Match#" + message.matchId + "#AwayClubScore").innerHTML = 0;
+                    document.getElementById("Match#" + message.matchId + "#Ticker").hidden = false;
+                }
+                if (message.currentMinute.localeCompare("HT") == 0)
+                {
+                    document.getElementById("Match#" + message.matchId + "#Ticker").hidden = true;
+                }
+                if (message.currentMinute.localeCompare("46") == 0)
+                {
+                    document.getElementById("Match#" + message.matchId + "#Ticker").hidden = false;
+                }
+                if (message.currentMinute.localeCompare("FT") == 0)
+                {
+                    document.getElementById("Match#" + message.matchId + "#Ticker").hidden = true;
+
+                    var matchOdds = document.getElementsByClassName("Match#" + message.matchId + "#Odd");
+                    var matchInitialOdds = document.getElementsByClassName("Match#" + message.matchId + "#InitialOdd");
+
+                    for (var i = 0; i < matchOdds.length; i++) {
+                        matchOdds[i].hidden = true;
+                        matchInitialOdds[i].hidden = false;
+                    }
+                }
+            }
+            
+        });
+
+        connection.on("MatchScoresChanged", (message) => {
+            var currentMinute = document.getElementById("Match#" + message.matchId + "#CurrentMinute").innerHTML;
+            var isCanceled = currentMinute.localeCompare("Canceled");
+            var isCompleted = currentMinute.localeCompare("FT");
+            if (isCanceled != 0 && isCompleted != 0)
+            {
+                document.getElementById("Match#" + message.matchId + "#HomeClubScore").innerHTML = message.homeClubScore;
+                document.getElementById("Match#" + message.matchId + "#AwayClubScore").innerHTML = message.awayClubScore;
+            }
+        });
+
+        connection.on("PossiblePickOddOrBetableStatusChanged", (message) => {
+            var currentMinute = document.getElementById("Match#" + message.matchId + "#CurrentMinute").innerHTML;
+            var isCanceled = currentMinute.localeCompare("Canceled");
+            var isCompleted = currentMinute.localeCompare("FT");
+            if (isCanceled != 0 && isCompleted != 0)
+            {
+                document.getElementById("Match#" + message.matchId + "#Result#" + message.matchResultAliasName + "#Odd").innerHTML = message.odd;
+                if (message.isBetable) {
+                    document.getElementById("Match#" + message.matchId + "#Result#" + message.matchResultAliasName + "#Link").style.pointerEvents = "auto";
+                    document.getElementById("Match#" + message.matchId + "#Result#" + message.matchResultAliasName + "#Link").onclick = function () { this.parentNode.submit();}
+                }
+                else
+                {
+                    document.getElementById("Match#" + message.matchId + "#Result#" + message.matchResultAliasName + "#Link").style.pointerEvents = "none";
+                    document.getElementById("Match#" + message.matchId + "#Result#" + message.matchResultAliasName + "#Link").removeAttribute("onclick");
+                }
+            }
+            
+        });
+    }
+</script>

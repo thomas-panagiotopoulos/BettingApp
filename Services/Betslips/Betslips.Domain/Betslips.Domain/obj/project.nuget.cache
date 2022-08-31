@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "01OSvSKiMI089OycimHHZio8DTjqmeJLHZNCuzw/ghJCroDHgtzCCZRU5L7J9i23nKKctmeASLlUpRF+Btpdnw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\thoma\\Dropbox\\CEID\\Διπλωματική\\BettingApp\\Services\\Betslips\\Betslips.Domain\\Betslips.Domain\\Betslips.Domain.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\thoma\\.nuget\\packages\\mediatr\\9.0.0\\mediatr.9.0.0.nupkg.sha512",
+    "C:\\Users\\thoma\\.nuget\\packages\\morelinq\\3.3.2\\morelinq.3.3.2.nupkg.sha512"
+  ],
+  "logs": []
+}

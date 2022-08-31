@@ -1,0 +1,35 @@
+﻿@page
+@model BettingApp.Services.Identity.API.Pages.Auth.SigninModel
+@{
+}
+@section Scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
+
+<div class="signin-section">
+
+    <div class="signin-content">
+        <div class="centered-content-container">
+            <h3>Sign In</h3>
+            <form class="signin-form" method="post" asp-route-returnUrl="@Model.ReturnUrl" asp-page="/Auth/Signin">
+                <label asp-for="Input.Email"></label>
+                <input asp-for="Input.Email" />
+                <span asp-validation-for="Input.Email" class="validation-message"></span>
+
+                <label asp-for="Input.Password"></label>
+                <input asp-for="Input.Password" />
+                <span asp-validation-for="Input.Password" class="validation-message"></span>
+
+                <button type="submit" class="btn-success">Sign In</button>
+                <div asp-validation-summary="ModelOnly" class="validation-message"></div>
+            </form>
+            
+            <p>Don't have an account? <a asp-page="/Auth/Register" asp-route-returnUrl="@Model.ReturnUrl">Register</a></p>
+            <form method="POST" asp-page="/Index" asp-page-handler="ReturnToOriginalApplication" asp-route-returnUrl="@Model.ReturnUrl">
+                <button type="submit" class="btn btn-primary">Return to Application</button>
+            </form>
+        </div>
+        
+    </div>
+</div>

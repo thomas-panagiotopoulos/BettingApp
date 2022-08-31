@@ -1,0 +1,364 @@
+services:
+  betslips-api:
+    build:
+      context: C:\Users\Thomas\Dropbox\CEID\─ώΏΈ∙ΉάΪώΆ▐\BettingApp
+      dockerfile: Services/Betslips/Betslips.API/Betslips.API/Dockerfile
+    depends_on:
+      betslips-signalrhub:
+        condition: service_started
+      betting-api:
+        condition: service_started
+      identity-api:
+        condition: service_started
+      rabbitmq:
+        condition: service_started
+      sqldata:
+        condition: service_started
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://0.0.0.0:80
+      ConnectionStrings__DefaultConnection: Server=sqldata;Database=BetslipsDB;User
+        Id=sa;Password=Pass@word;
+      EventBusConnection: rabbitmq
+      IdentityUrl: http://identity-api
+      IdentityUrlExternal: http://host.docker.internal:5000
+    image: bettingapp/betslips.api:linux-latest
+    ports:
+    - published: 5003
+      target: 80
+  betslips-signalrhub:
+    build:
+      context: C:\Users\Thomas\Dropbox\CEID\─ώΏΈ∙ΉάΪώΆ▐\BettingApp
+      dockerfile: Services/Betslips/Betslips.SignalrHub/Betslips.SignalrHub/Dockerfile
+    depends_on:
+      identity-api:
+        condition: service_started
+      rabbitmq:
+        condition: service_started
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://0.0.0.0:80
+      EventBusConnection: rabbitmq
+      IdentityUrl: http://identity-api
+      IdentityUrlExternal: http://host.docker.internal:5000
+    image: bettingapp/betslips.signalrhub:linux-latest
+    ports:
+    - published: 5013
+      target: 80
+  betting-api:
+    build:
+      context: C:\Users\Thomas\Dropbox\CEID\─ώΏΈ∙ΉάΪώΆ▐\BettingApp
+      dockerfile: Services/Betting/Betting.API/Betting.API/Dockerfile
+    depends_on:
+      betting-signalrhub:
+        condition: service_started
+      identity-api:
+        condition: service_started
+      notifications-api:
+        condition: service_started
+      rabbitmq:
+        condition: service_started
+      sqldata:
+        condition: service_started
+      wallets-api:
+        condition: service_started
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://0.0.0.0:80
+      ConnectionStrings__DefaultConnection: Server=sqldata;Database=BettingDB;User
+        Id=sa;Password=Pass@word;
+      EventBusConnection: rabbitmq
+      IdentityUrl: http://identity-api
+      IdentityUrlExternal: http://host.docker.internal:5000
+    image: bettingapp/betting.api:linux-latest
+    ports:
+    - published: 5004
+      target: 80
+  betting-signalrhub:
+    build:
+      context: C:\Users\Thomas\Dropbox\CEID\─ώΏΈ∙ΉάΪώΆ▐\BettingApp
+      dockerfile: Services/Betting/Betting.SignalrHub/Betting.SignalrHub/Dockerfile
+    depends_on:
+      identity-api:
+        condition: service_started
+      rabbitmq:
+        condition: service_started
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://0.0.0.0:80
+      EventBusConnection: rabbitmq
+      IdentityUrl: http://identity-api
+      IdentityUrlExternal: http://host.docker.internal:5000
+    image: bettingapp/betting.signalrhub:linux-latest
+    ports:
+    - published: 5014
+      target: 80
+  identity-api:
+    build:
+      context: C:\Users\Thomas\Dropbox\CEID\─ώΏΈ∙ΉάΪώΆ▐\BettingApp
+      dockerfile: Services/IdentityServer/Identity.API/Dockerfile
+    depends_on:
+      sqldata:
+        condition: service_started
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://0.0.0.0:80
+      ConnectionStrings__DefaultConnection: Server=sqldata;Database=IdentityDB;User
+        Id=sa;Password=Pass@word;
+      IsContainerEnv: "true"
+      WebRazorPagesClient: http://host.docker.internal:5010
+    image: bettingapp/identity.api:linux-latest
+    ports:
+    - published: 5000
+      target: 80
+    volumes:
+    - bettingapp-identity-api:/var/dpkeys:rw
+  matchsimulation-api:
+    build:
+      context: C:\Users\Thomas\Dropbox\CEID\─ώΏΈ∙ΉάΪώΆ▐\BettingApp
+      dockerfile: Services/MatchSimulation/MatchSimulation.API/Dockerfile
+    depends_on:
+      betslips-api:
+        condition: service_started
+      betting-api:
+        condition: service_started
+      rabbitmq:
+        condition: service_started
+      sportsbook-api:
+        condition: service_started
+      sqldata:
+        condition: service_started
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://0.0.0.0:80
+      ConnectionStrings__DefaultConnection: Server=sqldata;Database=MatchSimulationDB;User
+        Id=sa;Password=Pass@word;
+      EventBusConnection: rabbitmq
+    image: bettingapp/matchsimulation.api:linux-latest
+    ports:
+    - published: 5001
+      target: 80
+  notifications-api:
+    build:
+      context: C:\Users\Thomas\Dropbox\CEID\─ώΏΈ∙ΉάΪώΆ▐\BettingApp
+      dockerfile: Services/Notifications/Notifications.API/Dockerfile
+    depends_on:
+      identity-api:
+        condition: service_started
+      rabbitmq:
+        condition: service_started
+      sqldata:
+        condition: service_started
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://0.0.0.0:80
+      ConnectionStrings__DefaultConnection: Server=sqldata;Database=NotificationsDB;User
+        Id=sa;Password=Pass@word;
+      EventBusConnection: rabbitmq
+      IdentityUrl: http://identity-api
+      IdentityUrlExternal: http://host.docker.internal:5000
+    image: bettingapp/notifications.api:linux-latest
+    ports:
+    - published: 5007
+      target: 80
+  payments-api:
+    build:
+      context: C:\Users\Thomas\Dropbox\CEID\─ώΏΈ∙ΉάΪώΆ▐\BettingApp
+      dockerfile: Services/Payments/Payments.API/Dockerfile
+    depends_on:
+      rabbitmq:
+        condition: service_started
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://0.0.0.0:80
+      EventBusConnection: rabbitmq
+      IdentityUrl: http://identity-api
+      IdentityUrlExternal: http://host.docker.internal:5000
+    image: bettingapp/payments.api:linux-latest
+    ports:
+    - published: 5006
+      target: 80
+  rabbitmq:
+    image: rabbitmq:3.9.10-management-alpine
+    ports:
+    - published: 5672
+      target: 5672
+    - published: 15672
+      target: 15672
+  sportsbook-api:
+    build:
+      context: C:\Users\Thomas\Dropbox\CEID\─ώΏΈ∙ΉάΪώΆ▐\BettingApp
+      dockerfile: Services/Sportsbook/Sportsbook.API/Sportbook.API/Dockerfile
+    depends_on:
+      betslips-api:
+        condition: service_started
+      identity-api:
+        condition: service_started
+      rabbitmq:
+        condition: service_started
+      sportsbook-signalrhub:
+        condition: service_started
+      sqldata:
+        condition: service_started
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://0.0.0.0:80
+      ConnectionStrings__DefaultConnection: Server=sqldata;Database=SportsbookDB;User
+        Id=sa;Password=Pass@word;
+      EventBusConnection: rabbitmq
+      IdentityUrl: http://identity-api
+      IdentityUrlExternal: http://host.docker.internal:5000
+    image: bettingapp/sportsbook.api:linux-latest
+    ports:
+    - published: 5002
+      target: 80
+  sportsbook-signalrhub:
+    build:
+      context: C:\Users\Thomas\Dropbox\CEID\─ώΏΈ∙ΉάΪώΆ▐\BettingApp
+      dockerfile: Services/Sportsbook/Sportsbook.SignalrHub/Sportsbook.SignalrHub/Dockerfile
+    depends_on:
+      identity-api:
+        condition: service_started
+      rabbitmq:
+        condition: service_started
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://0.0.0.0:80
+      EventBusConnection: rabbitmq
+      IdentityUrl: http://identity-api
+      IdentityUrlExternal: http://host.docker.internal:5000
+    image: bettingapp/sportsbook.signalrhub:linux-latest
+    ports:
+    - published: 5012
+      target: 80
+  sqldata:
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: Pass@word
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    ports:
+    - published: 5433
+      target: 1433
+    volumes:
+    - bettingapp-sqldata:/var/opt/mssql:rw
+  wallets-api:
+    build:
+      context: C:\Users\Thomas\Dropbox\CEID\─ώΏΈ∙ΉάΪώΆ▐\BettingApp
+      dockerfile: Services/Wallets/Wallets.API/Dockerfile
+    depends_on:
+      identity-api:
+        condition: service_started
+      notifications-api:
+        condition: service_started
+      payments-api:
+        condition: service_started
+      rabbitmq:
+        condition: service_started
+      sqldata:
+        condition: service_started
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://0.0.0.0:80
+      ConnectionStrings__DefaultConnection: Server=sqldata;Database=WalletsDB;User
+        Id=sa;Password=Pass@word;
+      EventBusConnection: rabbitmq
+      IdentityUrl: http://identity-api
+      IdentityUrlExternal: http://host.docker.internal:5000
+    image: bettingapp/wallets.api:linux-latest
+    ports:
+    - published: 5005
+      target: 80
+  webgamblingapigw:
+    build:
+      context: C:\Users\Thomas\Dropbox\CEID\─ώΏΈ∙ΉάΪώΆ▐\BettingApp
+      dockerfile: ApiGateways/ApiGw-Base/OcelotApiGw/Dockerfile
+    depends_on:
+      betslips-api:
+        condition: service_started
+      betslips-signalrhub:
+        condition: service_started
+      betting-api:
+        condition: service_started
+      betting-signalrhub:
+        condition: service_started
+      identity-api:
+        condition: service_started
+      sportsbook-api:
+        condition: service_started
+      sportsbook-signalrhub:
+        condition: service_started
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      IdentityUrl: http://identity-api
+      IdentityUrlExternal: http://host.docker.internal:5000
+    image: bettingapp/ocelotapigw:linux-latest
+    ports:
+    - published: 5200
+      target: 80
+    volumes:
+    - C:\Users\Thomas\Dropbox\CEID\─ώΏΈ∙ΉάΪώΆ▐\BettingApp\ApiGateways\Web.Bff.Gambling:/app/configuration:rw
+  webrazorpages:
+    build:
+      context: C:\Users\Thomas\Dropbox\CEID\─ώΏΈ∙ΉάΪώΆ▐\BettingApp
+      dockerfile: WebApps/WebRazorPages/WebRazorPages/Dockerfile
+    depends_on:
+      betslips-signalrhub:
+        condition: service_started
+      betting-signalrhub:
+        condition: service_started
+      identity-api:
+        condition: service_started
+      sportsbook-signalrhub:
+        condition: service_started
+      webgamblingapigw:
+        condition: service_started
+      webwalletsandnotificationsapigw:
+        condition: service_started
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://0.0.0.0:80
+      BetslipsSignalrHubUrl: http://host.docker.internal:5013
+      BettingSignalrHubUrl: http://host.docker.internal:5014
+      GamblingUrl: http://webgamblingapigw
+      GamblingUrlExternal: http://host.docker.internal:5200
+      IdentityUrl: http://host.docker.internal:5000
+      IdentityUrlInternal: http://identity-api
+      IsContainerEnv: "true"
+      SportsbookSignalrHubUrl: http://host.docker.internal:5012
+      WalletsAndNotificationsUrl: http://webwalletsandnotificationsapigw
+      WalletsAndNotificationsUrlExternal: http://host.docker.internal:5201
+    image: bettingapp/webrazorpages:linux-latest
+    ports:
+    - published: 5010
+      target: 80
+    volumes:
+    - bettingapp-webrazorpages:/var/dpkeys:rw
+  webwalletsandnotificationsapigw:
+    build:
+      context: C:\Users\Thomas\Dropbox\CEID\─ώΏΈ∙ΉάΪώΆ▐\BettingApp
+      dockerfile: ApiGateways/ApiGw-Base/OcelotApiGw/Dockerfile
+    depends_on:
+      identity-api:
+        condition: service_started
+      notifications-api:
+        condition: service_started
+      wallets-api:
+        condition: service_started
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      IdentityUrl: http://identity-api
+      IdentityUrlExternal: http://host.docker.internal:5000
+    image: bettingapp/ocelotapigw:linux-latest
+    ports:
+    - published: 5201
+      target: 80
+    volumes:
+    - C:\Users\Thomas\Dropbox\CEID\─ώΏΈ∙ΉάΪώΆ▐\BettingApp\ApiGateways\Web.Bff.WalletsAndNotifications:/app/configuration:rw
+version: '3.4'
+volumes:
+  bettingapp-identity-api:
+    external: false
+  bettingapp-sqldata:
+    external: false
+  bettingapp-webrazorpages:
+    external: false

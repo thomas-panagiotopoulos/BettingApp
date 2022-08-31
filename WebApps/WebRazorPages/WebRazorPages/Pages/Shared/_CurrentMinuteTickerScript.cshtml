@@ -1,0 +1,26 @@
+﻿
+<script type="text/javascript">
+
+    var intervalId = setInterval(tickCurrentMinute, 1000);
+
+    function tickCurrentMinute()
+    {
+        var tickers = document.getElementsByClassName("current-minute-ticker");
+
+        for (var i = 0; i < tickers.length; i++)
+        {
+            if (tickers[i].hidden === false)
+            {
+                if (tickers[i].innerHTML === "'")
+                {
+                    tickers[i].innerHTML = "";
+                }
+                else
+                {
+                    tickers[i].innerHTML = "'";
+                }
+            }
+        }
+    }
+
+</script>

@@ -1,0 +1,51 @@
+﻿@page
+@model BettingApp.Services.Identity.API.Pages.Auth.RegisterModel
+@{
+}
+@section Scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
+<div class="register-section">
+    <div class="register-content">
+
+        <div class="centered-content-container">
+            <h3>Register</h3>
+            <form method="post" asp-route-returnUrl="@Model.ReturnUrl" asp-page="/Auth/Register" class="register-form">
+
+                <label asp-for="Input.FirstName"></label>
+                <input asp-for="Input.FirstName" />
+                <span asp-validation-for="Input.FirstName" class="validation-message"></span>
+
+                <label asp-for="Input.LastName"></label>
+                <input asp-for="Input.LastName" />
+                <span asp-validation-for="Input.LastName" class="validation-message"></span>
+
+                <label asp-for="Input.IdNumber"></label>
+                <input asp-for="Input.IdNumber" />
+                <span asp-validation-for="Input.IdNumber" class="validation-message"></span>
+
+                <label asp-for="Input.Email"></label>
+                <input asp-for="Input.Email" />
+                <span asp-validation-for="Input.Email" class="validation-message"></span>
+
+                <label asp-for="Input.Password"></label>
+                <input asp-for="Input.Password" />
+                <span asp-validation-for="Input.Password" class="validation-message"></span>
+
+                <label asp-for="Input.ConfirmPassword"></label>
+                <input asp-for="Input.ConfirmPassword" />
+                <span asp-validation-for="Input.ConfirmPassword" class="validation-message"></span>
+
+                <button type="submit" class="btn-success">Register</button>
+                <div asp-validation-summary="ModelOnly" class="validation-message"></div>
+            </form>
+            <p>Already a member? <a asp-page="/Auth/Signin" asp-route-returnUrl="@Model.ReturnUrl">Sign In</a></p>
+            <form method="Post" asp-page="/Index" asp-page-handler="ReturnToOriginalApplication" asp-route-returnUrl="@Model.ReturnUrl">
+                <button type="submit" class="btn btn-primary">Return to Application</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+

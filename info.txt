@@ -1,0 +1,1 @@
+Όταν θέλω να τρέξω την εφαρμογή μέσω Docker containers, καλό θα ήταν πριν τρέξω την εντολή docker-compose up, να εκκινήσω πρώτα χειροκίνητα το container με το RabbitMQ και το container του SQL Server.

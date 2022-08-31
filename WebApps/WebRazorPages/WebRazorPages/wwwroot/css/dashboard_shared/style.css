@@ -1,0 +1,14 @@
+﻿.dashboard-side-menu-section {
+    position: fixed;
+    height: 82.5%;
+    width: 20%;
+    z-index: 1;
+    top: 14%;
+    left: 0;
+    padding: 10px;
+    color: white;
+    background-color: #5f5f5f;
+    border: 1px solid black;
+    border-collapse: collapse;
+    overflow: hidden;
+}

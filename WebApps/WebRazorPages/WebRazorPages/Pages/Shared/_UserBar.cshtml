@@ -1,0 +1,35 @@
+﻿@inject BettingApp.WebApps.WebRazorPages.Services.IIdentityParser<ApplicationUser> UserManager
+@{
+    var user = UserManager.Parse(User);
+}
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="user-welcome">Hi @user.FirstName!</div>
+    <div class="dropdown">
+        <button class="dropbtn btn-primary">Dashboard</button>
+        <div class="dropdown-content">
+            <a href="/Dashboard/Account">Account</a>
+            <a href="/Dashboard/Bets">Bets</a>
+            <a href="/Dashboard/Wallet">Wallet</a>
+            <a href="/Dashboard/Notifications">Notifications</a>
+        </div>
+    </div>
+
+    <form class="betslip-button" method="get" asp-page="/Betslip/Index">
+        <button type="submit" class="btn btn-primary">Betslip</button>
+    </form>
+
+    <form class="signout-button" method="post" asp-page="/Dashboard/Account/Signout">
+        <button type="submit" class="btn btn-secondary">Sign Out</button>
+    </form>
+}
+else
+{
+    <form class="signin-button" method="post" asp-page="/Dashboard/Account/Signin" asp-route-returnUrl="@Url.Content("/Index")">
+        <button type="submit" class="btn btn-primary">Sign In</button>
+    </form>
+    /*<form class="register-button" method="post" asp-page="/Dashboard/Account/Register" asp-route-returnUrl="@Url.Content("/Index")">
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>*/
+
+}

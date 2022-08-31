@@ -1,0 +1,12 @@
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\MatchSimulation\MatchSimulation.Domain\MatchSimulation.Domain\bin\Debug\net5.0\MatchSimulation.Domain.deps.json
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\MatchSimulation\MatchSimulation.Domain\MatchSimulation.Domain\bin\Debug\net5.0\MatchSimulation.Domain.dll
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\MatchSimulation\MatchSimulation.Domain\MatchSimulation.Domain\bin\Debug\net5.0\ref\MatchSimulation.Domain.dll
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\MatchSimulation\MatchSimulation.Domain\MatchSimulation.Domain\bin\Debug\net5.0\MatchSimulation.Domain.pdb
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\MatchSimulation\MatchSimulation.Domain\MatchSimulation.Domain\obj\Debug\net5.0\MatchSimulation.Domain.csprojAssemblyReference.cache
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\MatchSimulation\MatchSimulation.Domain\MatchSimulation.Domain\obj\Debug\net5.0\MatchSimulation.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\MatchSimulation\MatchSimulation.Domain\MatchSimulation.Domain\obj\Debug\net5.0\MatchSimulation.Domain.AssemblyInfoInputs.cache
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\MatchSimulation\MatchSimulation.Domain\MatchSimulation.Domain\obj\Debug\net5.0\MatchSimulation.Domain.AssemblyInfo.cs
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\MatchSimulation\MatchSimulation.Domain\MatchSimulation.Domain\obj\Debug\net5.0\MatchSimulation.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\MatchSimulation\MatchSimulation.Domain\MatchSimulation.Domain\obj\Debug\net5.0\MatchSimulation.Domain.dll
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\MatchSimulation\MatchSimulation.Domain\MatchSimulation.Domain\obj\Debug\net5.0\ref\MatchSimulation.Domain.dll
+C:\Users\Thomas\Dropbox\CEID\Διπλωματική\BettingApp\Services\MatchSimulation\MatchSimulation.Domain\MatchSimulation.Domain\obj\Debug\net5.0\MatchSimulation.Domain.pdb

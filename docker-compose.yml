@@ -1,0 +1,160 @@
+version: '3.4'
+
+services:
+
+  sqldata:
+    image: mcr.microsoft.com/mssql/server:2019-latest 
+
+  rabbitmq:
+    image: rabbitmq:3.9.10-management-alpine
+
+  identity-api:
+    image: ${REGISTRY:-bettingapp}/identity.api:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: .
+      dockerfile: Services/IdentityServer/Identity.API/Dockerfile
+    depends_on:
+      - sqldata
+
+  matchsimulation-api:
+    image: ${REGISTRY:-bettingapp}/matchsimulation.api:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: .
+      dockerfile: Services/MatchSimulation/MatchSimulation.API/Dockerfile
+    depends_on:
+      - sqldata
+      - rabbitmq
+      - sportsbook-api
+      - betslips-api
+      - betting-api
+
+  sportsbook-api:
+    image: ${REGISTRY:-bettingapp}/sportsbook.api:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: .
+      dockerfile: Services/Sportsbook/Sportsbook.API/Sportbook.API/Dockerfile #misstyped 'Sportbook.API' when creating project
+    depends_on:
+      - sqldata
+      - rabbitmq
+      - identity-api
+      - betslips-api
+      - sportsbook-signalrhub
+
+  betslips-api:
+    image: ${REGISTRY:-bettingapp}/betslips.api:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: .
+      dockerfile: Services/Betslips/Betslips.API/Betslips.API/Dockerfile
+    depends_on:
+      - sqldata
+      - rabbitmq
+      - identity-api
+      - betting-api
+      - betslips-signalrhub
+
+  betting-api:
+    image: ${REGISTRY:-bettingapp}/betting.api:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: .
+      dockerfile: Services/Betting/Betting.API/Betting.API/Dockerfile
+    depends_on:
+      - sqldata
+      - rabbitmq
+      - identity-api
+      - wallets-api
+      - notifications-api
+      - betting-signalrhub
+
+  wallets-api:
+    image: ${REGISTRY:-bettingapp}/wallets.api:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: .
+      dockerfile: Services/Wallets/Wallets.API/Dockerfile
+    depends_on:
+      - sqldata
+      - rabbitmq
+      - identity-api
+      - payments-api
+      - notifications-api
+
+  payments-api:
+    image: ${REGISTRY:-bettingapp}/payments.api:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: .
+      dockerfile: Services/Payments/Payments.API/Dockerfile
+    depends_on:
+      - rabbitmq
+
+  notifications-api:
+    image: ${REGISTRY:-bettingapp}/notifications.api:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: .
+      dockerfile: Services/Notifications/Notifications.API/Dockerfile
+    depends_on:
+      - sqldata
+      - rabbitmq
+      - identity-api
+
+  sportsbook-signalrhub:
+    image: ${REGISTRY:-bettingapp}/sportsbook.signalrhub:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: .
+      dockerfile: Services/Sportsbook/Sportsbook.SignalrHub/Sportsbook.SignalrHub/Dockerfile
+    depends_on:
+    - rabbitmq
+    - identity-api
+
+  betslips-signalrhub:
+    image: ${REGISTRY:-bettingapp}/betslips.signalrhub:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: .
+      dockerfile: Services/Betslips/Betslips.SignalrHub/Betslips.SignalrHub/Dockerfile
+    depends_on:
+    - rabbitmq
+    - identity-api
+
+  betting-signalrhub:
+    image: ${REGISTRY:-bettingapp}/betting.signalrhub:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: .
+      dockerfile: Services/Betting/Betting.SignalrHub/Betting.SignalrHub/Dockerfile
+    depends_on:
+    - rabbitmq
+    - identity-api
+
+  webgamblingapigw:
+    image: ${REGISTRY:-bettingapp}/ocelotapigw:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: .
+      dockerfile: ApiGateways/ApiGw-Base/OcelotApiGw/Dockerfile
+    depends_on:
+      - identity-api
+      - sportsbook-api
+      - betslips-api
+      - betting-api
+      - sportsbook-signalrhub
+      - betslips-signalrhub
+      - betting-signalrhub
+
+  webwalletsandnotificationsapigw:
+    image: ${REGISTRY:-bettingapp}/ocelotapigw:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: .
+      dockerfile: ApiGateways/ApiGw-Base/OcelotApiGw/Dockerfile
+    depends_on:
+      - identity-api
+      - wallets-api
+      - notifications-api  
+
+  webrazorpages:
+    image: ${REGISTRY:-bettingapp}/webrazorpages:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: .
+      dockerfile: WebApps/WebRazorPages/WebRazorPages/Dockerfile
+    depends_on:
+      - identity-api
+      - webgamblingapigw
+      - webwalletsandnotificationsapigw
+      - sportsbook-signalrhub
+      - betslips-signalrhub
+      - betting-signalrhub

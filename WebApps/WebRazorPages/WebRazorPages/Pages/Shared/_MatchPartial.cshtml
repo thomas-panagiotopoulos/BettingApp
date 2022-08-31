@@ -1,0 +1,51 @@
+﻿@model Match
+@{ 
+    bool displayTicker = !Model.CurrentMinute.Equals("0") && 
+                         !Model.CurrentMinute.Equals("HT") && 
+                         !Model.CurrentMinute.Equals("FT") &&
+                         !Model.IsCanceled; 
+}
+<td>
+    <div class="match-id">@Model.Id</div>
+</td>
+<td>
+    <div class="match">
+        <div class="match-club">
+            <div class="match-club-name">@Model.HomeClubName</div>
+            <div class="match-club-score" id="Match#@Model.Id#HomeClubScore">
+                @(Model.CurrentMinute.Equals("0") || Model.IsCanceled ? "-" : Model.HomeClubScore)
+            </div>
+        </div>
+        <br />
+        <div class="match-club">
+            <div class="match-club-name">@Model.AwayClubName</div>
+            <div class="match-club-score" id="Match#@Model.Id#AwayClubScore">
+                @(Model.CurrentMinute.Equals("0") || Model.IsCanceled ? "-" : Model.AwayClubScore)
+            </div>
+        </div>
+        <br />
+        <div class="match-current-minute">
+            <div id="Match#@Model.Id#CurrentMinute">
+                @if (!Model.IsCanceled)
+                {
+                    @(Model.CurrentMinute.Equals("0") ? Model.KickoffDateTime.ToString("HH:mm") : Model.CurrentMinute)
+                }
+                else
+                {
+                    @("Canceled")
+                }
+            </div>
+            <div class="current-minute-ticker" id="Match#@Model.Id#Ticker" @(displayTicker ? "" : "hidden")>'</div>
+        </div>
+    </div>
+</td>
+@foreach (var pp in Model.PossiblePicks.OrderBy(pp => pp.MatchResultId))
+{
+    <td>
+        @{ ViewData["matchCompletedOrCanceled"] = Model.IsCanceled || Model.CurrentMinute.Equals("FT"); }
+        <partial name="_PossiblePickPartial" model="@pp" />
+    </td>
+}
+
+
+

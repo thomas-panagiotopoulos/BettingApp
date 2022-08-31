@@ -1,0 +1,16 @@
+﻿.header-bar-title{
+    width: fit-content;
+    height: fit-content;
+}
+
+.header-bar-title a, a:link, a:visited, a:active, a:hover {
+    text-decoration: none;
+}
+
+
+.header-bar-title a h2 {
+    display: inline;
+    font-size: 40px;
+    margin: 10px 3px 5px 3px;
+    color: black;
+}

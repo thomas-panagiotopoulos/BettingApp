@@ -1,0 +1,54 @@
+﻿@page
+@model BettingApp.WebApps.WebRazorPages.Pages.Dashboard.Wallet.WithdrawSuccessModel
+
+@section UserBar{
+
+    <partial name="_UserBar" />
+}
+
+@section Scripts{
+
+}
+
+<div class="dashboard-side-menu-section">
+    <partial name="_DashboardSideMenu" />
+</div>
+
+<div class="wallet-success-section">
+
+    <label class="wallet-sucess-label">Wallet Withdraw</label>
+
+    <div class="wallet-success-content">
+        <div class="wallet-success-content-centered-item">
+            @if (!Model.RequestIdValid)
+            {
+                <h4>Request ID not valid</h4>
+                <img src="~/error-icon.png" alt="Error" class="wallet-success-error-icon" />
+                <p>
+                    The provided request ID is not valid.
+                </p>
+            }
+            else if (!Model.RequestFound)
+            {
+                <h4>Request ID not found</h4>
+                <img src="~/warning-icon.png" alt="Warning" class="wallet-success-warning-icon"/>
+                <p>
+                    If you submitted a Withdraw request, you can refresh this page in a few minutes,
+                    or wait for a notification about your Withdraw request outcome.
+                </p>
+                <p>Click <a asp-page="Index">here</a> to return to Index page.</p>
+            }
+            else
+            {
+                <h4>Withdraw Request Successful</h4>
+                <img src="~/success-icon.png" alt="Success" class="wallet-success-success-icon"/>
+                <p>
+                    Your Withdraw request was succesfully sent.
+                    You will shortly receive a notification about your Withdraw request outcome.
+                </p>
+                <p>Click <a asp-page="/Dashboard/Wallet/Index">here</a> to return to your Wallet page.</p>
+            }
+        </div>
+    </div>
+</div>
+

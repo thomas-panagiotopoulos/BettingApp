@@ -1,0 +1,70 @@
+﻿@model BettingApp.WebApps.WebRazorPages.Models.Betslip 
+ 
+
+
+<div class="index-betslip-selections-list">
+    @if (Model.Selections.Any())
+    {
+        <table>
+            @foreach (var selection in Model.Selections)
+            {
+                <tr>
+                    <td>
+                        <partial name="_BetslipSelectionPartial" model="@selection" />
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+    else 
+    { 
+    
+        <div class="centered-content-container">
+            <div class="centered-content-item">
+                Empty
+            </div>
+        </div>
+    }
+</div>
+
+<div class="index-betslip-panel">
+
+    <!-- <label>Selections: </label>
+    <input id="betslip-selections-count" value="@Model.Selections?.Count" readonly /> -->
+
+    <label>Total Odd: </label>
+    <input id="betslip-total-odd" value="@Model.TotalOdd" readonly />
+
+    <label>Winnings: </label>
+    <input id="betslip-potential-winnings" value="@Model.PotentialWinnings €" readonly />
+
+    <!-- <label>Profit: </label>
+    <input id="betslip-potential-profit" value="@Model.PotentialProfit €" readonly /> -->
+
+    <form class="index-betslip-panel-update-wagered-amount-form" method="post"
+          asp-page="/Betslip/Index" asp-page-handler="UpdateWageredAmount" >
+        <input type="hidden" value="@ViewData["ReturnUrl"]" name="returnUrl" />
+        <label>Wagered amount: </label>
+        <input id="betslip-wagered-amount" name="wageredAmount"
+               type="number" min="0.01" step=".01" placeholder="@Model.WageredAmount €" required />
+        <button type="submit" class="btn-sm">Update</button>
+    </form>
+
+    <form class="index-betslip-panel-clear-betslip-form" method="post"
+          asp-page="/Betslip/Index" asp-page-handler="ClearBetslip" asp-route-returnUrl="@ViewData["ReturnUrl"]">
+        <button type="submit" class="btn-sm" @(!Model.Selections.Any() ? "disabled" : "")>
+            Clear Betslip
+        </button>
+    </form>
+
+    <form class="index-betslip-panel-to-betslip-form" asp-page="/Betslip/Index" method="get">
+        <button type="submit" class="btn-primary">View Betslip</button>
+    </form>
+
+    <div class="index-betslip-panel-betable-status-label">
+        <label id="betslip-betable-status">
+            @(!Model.IsBetable ? "Not Betable" : "")
+        </label>
+    </div>
+
+</div>

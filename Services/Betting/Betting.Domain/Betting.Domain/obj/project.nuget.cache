@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "JbXmr7FJjP9K96sLIBm1h+TIdbHGwHVyT0n/diDyS/kQMCj+U+We7lbfzA/Hg0kMV3rFO+MLxQLnXCRMtb4bHQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\thoma\\Dropbox\\CEID\\Διπλωματική\\BettingApp\\Services\\Betting\\Betting.Domain\\Betting.Domain\\Betting.Domain.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\thoma\\.nuget\\packages\\mediatr\\9.0.0\\mediatr.9.0.0.nupkg.sha512",
+    "C:\\Users\\thoma\\.nuget\\packages\\morelinq\\3.3.2\\morelinq.3.3.2.nupkg.sha512"
+  ],
+  "logs": []
+}

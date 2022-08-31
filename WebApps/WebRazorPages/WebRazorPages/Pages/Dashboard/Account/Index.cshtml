@@ -1,0 +1,37 @@
+﻿@page
+@model BettingApp.WebApps.WebRazorPages.Pages.Dashboard.Account.IndexModel
+@section UserBar{
+
+    <partial name="_UserBar" />
+}
+
+@section Scripts{
+
+}
+
+<div class="dashboard-side-menu-section">
+    <partial name="_DashboardSideMenu" />
+</div>
+
+<div class="account-section">
+    <label class="account-label">
+        Account
+    </label>
+
+    <div class="account-content">
+        <label>First Name: </label>
+        <input value="@Model.ApplicationUser.FirstName" readonly />
+
+        <label>Last Name: </label>
+        <input value="@Model.ApplicationUser.LastName" readonly />
+
+        <label>ID Number: </label>
+        <input value="@Model.ApplicationUser.IdNumber" readonly />
+
+        <label>Email Address: </label>
+        <input value="@Model.ApplicationUser.Email" readonly />
+
+        <label>Account ID: </label>
+        <input value="@Model.ApplicationUser.Id" readonly />
+    </div>
+</div>

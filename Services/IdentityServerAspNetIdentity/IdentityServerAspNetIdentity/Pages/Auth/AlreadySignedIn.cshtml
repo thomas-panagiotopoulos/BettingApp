@@ -1,0 +1,14 @@
+﻿@page
+@model IdentityServerAspNetIdentity.Pages.AlreadyLoggedInModel
+@{
+}
+
+<p>
+    You are already signed in as @User.Identity.Name.
+</p>
+<p>
+    If you wish to log in with a different account, you have to <a asp-page="Signout">Sign out</a> first.
+</p>
+<form action="~/Index" method="GET">
+    <button type="submit" class="btn btn-primary">Return to Home Page</button>
+</form>

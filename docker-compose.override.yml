@@ -1,0 +1,190 @@
+version: '3.4'
+
+services:
+
+  sqldata:
+    environment:
+      - SA_PASSWORD=Pass@word
+      - ACCEPT_EULA=Y
+    ports:
+      - "5433:1433"    # Important: In a production environment your should remove the external port  
+    volumes:
+      - bettingapp-sqldata:/var/opt/mssql
+
+  rabbitmq: 
+    ports:
+      - "15672:15672"  # Important: In a production environment your should remove the external port
+      - "5672:5672"    # Important: In a production environment your should remove the external port
+
+  identity-api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://0.0.0.0:80
+      - ConnectionStrings__DefaultConnection=Server=sqldata;Database=IdentityDB;User Id=sa;Password=Pass@word;
+      - WebRazorPagesClient=http://${BETTINGAPP_EXTERNAL_DNS_NAME_OR_IP}:5010       #Local: You need to open your local dev-machine firewall at range 5100-5110. 
+      - IsContainerEnv=true
+    ports:
+      - "5000:80"
+    volumes:
+      - bettingapp-identity-api:/var/dpkeys
+
+  matchsimulation-api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://0.0.0.0:80  
+      - ConnectionStrings__DefaultConnection=Server=sqldata;Database=MatchSimulationDB;User Id=sa;Password=Pass@word;
+      - EventBusConnection=rabbitmq
+    ports:
+      - "5001:80" # Important: In a production environment your should remove the external port (5001) kept here for microservice debugging purposes. 
+                    # The API Gateway redirects and access through the internal port (80).
+
+  sportsbook-api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://0.0.0.0:80   
+      - ConnectionStrings__DefaultConnection=Server=sqldata;Database=SportsbookDB;User Id=sa;Password=Pass@word;
+      - EventBusConnection=rabbitmq
+      - IdentityUrlExternal=http://${BETTINGAPP_EXTERNAL_DNS_NAME_OR_IP}:5000             #Local: You need to open your local dev-machine firewall at range 5100-5110.
+      - IdentityUrl=http://identity-api
+    ports:
+      - "5002:80" # Important: In a production environment your should remove the external port (5002) kept here for microservice debugging purposes. 
+                    # The API Gateway redirects and access through the internal port (80).
+
+  betslips-api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://0.0.0.0:80      
+      - ConnectionStrings__DefaultConnection=Server=sqldata;Database=BetslipsDB;User Id=sa;Password=Pass@word;
+      - EventBusConnection=rabbitmq
+      - IdentityUrlExternal=http://${BETTINGAPP_EXTERNAL_DNS_NAME_OR_IP}:5000             #Local: You need to open your local dev-machine firewall at range 5100-5110.
+      - IdentityUrl=http://identity-api
+    ports:
+      - "5003:80" # Important: In a production environment your should remove the external port (5003) kept here for microservice debugging purposes. 
+                    # The API Gateway redirects and access through the internal port (80).
+
+  betting-api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://0.0.0.0:80      
+      - ConnectionStrings__DefaultConnection=Server=sqldata;Database=BettingDB;User Id=sa;Password=Pass@word;
+      - EventBusConnection=rabbitmq
+      - IdentityUrlExternal=http://${BETTINGAPP_EXTERNAL_DNS_NAME_OR_IP}:5000             #Local: You need to open your local dev-machine firewall at range 5100-5110.
+      - IdentityUrl=http://identity-api
+    ports:
+      - "5004:80" # Important: In a production environment your should remove the external port (5004) kept here for microservice debugging purposes. 
+                    # The API Gateway redirects and access through the internal port (80).
+
+  wallets-api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://0.0.0.0:80      
+      - ConnectionStrings__DefaultConnection=Server=sqldata;Database=WalletsDB;User Id=sa;Password=Pass@word;
+      - EventBusConnection=rabbitmq
+      - IdentityUrlExternal=http://${BETTINGAPP_EXTERNAL_DNS_NAME_OR_IP}:5000             #Local: You need to open your local dev-machine firewall at range 5100-5110.
+      - IdentityUrl=http://identity-api
+    ports:
+      - "5005:80" # Important: In a production environment your should remove the external port (5005) kept here for microservice debugging purposes. 
+                    # The API Gateway redirects and access through the internal port (80).
+  
+  payments-api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://0.0.0.0:80      
+      - EventBusConnection=rabbitmq
+      - IdentityUrlExternal=http://${BETTINGAPP_EXTERNAL_DNS_NAME_OR_IP}:5000             #Local: You need to open your local dev-machine firewall at range 5100-5110.
+      - IdentityUrl=http://identity-api
+    ports:
+      - "5006:80" # Important: In a production environment your should remove the external port (5006) kept here for microservice debugging purposes. 
+                    # The API Gateway redirects and access through the internal port (80).
+
+  notifications-api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://0.0.0.0:80      
+      - ConnectionStrings__DefaultConnection=Server=sqldata;Database=NotificationsDB;User Id=sa;Password=Pass@word;
+      - EventBusConnection=rabbitmq
+      - IdentityUrlExternal=http://${BETTINGAPP_EXTERNAL_DNS_NAME_OR_IP}:5000             #Local: You need to open your local dev-machine firewall at range 5100-5110.
+      - IdentityUrl=http://identity-api
+    ports:
+      - "5007:80" # Important: In a production environment your should remove the external port (5007) kept here for microservice debugging purposes. 
+                    # The API Gateway redirects and access through the internal port (80).
+
+  sportsbook-signalrhub:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://0.0.0.0:80      
+      - EventBusConnection=rabbitmq
+      - IdentityUrlExternal=http://${BETTINGAPP_EXTERNAL_DNS_NAME_OR_IP}:5000             #Local: You need to open your local dev-machine firewall at range 5100-5110.
+      - IdentityUrl=http://identity-api
+    ports:
+      - "5012:80" # Important: In a production environment your should remove the external port (5012) kept here for microservice debugging purposes. 
+                    # The API Gateway redirects and access through the internal port (80).
+
+  betslips-signalrhub:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://0.0.0.0:80      
+      - EventBusConnection=rabbitmq
+      - IdentityUrlExternal=http://${BETTINGAPP_EXTERNAL_DNS_NAME_OR_IP}:5000             #Local: You need to open your local dev-machine firewall at range 5100-5110.
+      - IdentityUrl=http://identity-api
+    ports:
+      - "5013:80" # Important: In a production environment your should remove the external port (5013) kept here for microservice debugging purposes. 
+                    # The API Gateway redirects and access through the internal port (80).
+
+  betting-signalrhub:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://0.0.0.0:80      
+      - EventBusConnection=rabbitmq
+      - IdentityUrlExternal=http://${BETTINGAPP_EXTERNAL_DNS_NAME_OR_IP}:5000             #Local: You need to open your local dev-machine firewall at range 5100-5110.
+      - IdentityUrl=http://identity-api
+    ports:
+      - "5014:80" # Important: In a production environment your should remove the external port (5014) kept here for microservice debugging purposes. 
+                    # The API Gateway redirects and access through the internal port (80).
+
+  webgamblingapigw:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - IdentityUrlExternal=http://${BETTINGAPP_EXTERNAL_DNS_NAME_OR_IP}:5000             #Local: You need to open your local dev-machine firewall at range 5100-5110.
+      - IdentityUrl=http://identity-api
+    ports:
+      - "5200:80"   
+    volumes:
+      - ./ApiGateways/Web.Bff.Gambling:${BETTINGAPP_OCELOT_VOLUME_SPEC:-/app/configuration}
+
+  webwalletsandnotificationsapigw:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - IdentityUrlExternal=http://${BETTINGAPP_EXTERNAL_DNS_NAME_OR_IP}:5000             #Local: You need to open your local dev-machine firewall at range 5100-5110.
+      - IdentityUrl=http://identity-api
+    ports:
+      - "5201:80"   
+    volumes:
+      - ./ApiGateways/Web.Bff.WalletsAndNotifications:${BETTINGAPP_OCELOT_VOLUME_SPEC:-/app/configuration}
+
+  webrazorpages:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://0.0.0.0:80
+      - IdentityUrl=http://${BETTINGAPP_EXTERNAL_DNS_NAME_OR_IP}:5000             #Local: You need to open your local dev-machine firewall at range 5100-5110.
+      - IdentityUrlInternal=http://identity-api
+      - GamblingUrl=http://webgamblingapigw 
+      - WalletsAndNotificationsUrl=http://webwalletsandnotificationsapigw
+      - GamblingUrlExternal=http://${BETTINGAPP_EXTERNAL_DNS_NAME_OR_IP}:5200
+      - WalletsAndNotificationsUrlExternal=http://${BETTINGAPP_EXTERNAL_DNS_NAME_OR_IP}:5201
+      - SportsbookSignalrHubUrl=http://${BETTINGAPP_EXTERNAL_DNS_NAME_OR_IP}:5012
+      - BetslipsSignalrHubUrl=http://${BETTINGAPP_EXTERNAL_DNS_NAME_OR_IP}:5013
+      - BettingSignalrHubUrl=http://${BETTINGAPP_EXTERNAL_DNS_NAME_OR_IP}:5014
+      - IsContainerEnv=true
+    ports:
+      - "5010:80"
+    volumes:
+      - bettingapp-webrazorpages:/var/dpkeys
+  
+volumes:
+  bettingapp-sqldata:
+    external: false
+  bettingapp-identity-api:
+    external: false
+  bettingapp-webrazorpages:
+    external: false

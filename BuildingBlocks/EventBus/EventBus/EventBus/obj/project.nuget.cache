@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "xmZDwRblde6yS+1HbO2iveHOGSbtYFXnn4S0RIAVfhbj6XyyvCQDHImo46LuXTa9/lyypVBKT100mln72gvujg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\thoma\\Dropbox\\CEID\\Διπλωματική\\BettingApp\\BuildingBlocks\\EventBus\\EventBus\\EventBus\\EventBus.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\thoma\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}

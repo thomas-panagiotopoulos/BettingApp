@@ -1,0 +1,136 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using Microsoft.AspNetCore.Authentication;
+@using Microsoft.Extensions.Options
+@inject IOptions<AppSettings> settings
+@{
+    string betslipsSignalrHubUrl;
+
+    if (settings.Value.IsContainerEnv == true)
+    {
+        // If we manage to fix the routing issue when attempting to connect to SignalrHubs through the Ocelot ApiGw,
+        // then we will switch to using the Web.Bff.Gambling Url. Until then, we connect to SignalrHubs directly
+        // from their external Urls.
+        //betslipsSignalrHubUrl = settings.Value.GamblingUrlExternal;
+        betslipsSignalrHubUrl = settings.Value.BetslipsSignalrHubUrl;
+
+    }
+    else
+    {
+        betslipsSignalrHubUrl = settings.Value.BetslipsSignalrHubUrl;
+    }
+}
+<script type="text/javascript">
+    if ('@User.Identity.IsAuthenticated' === 'True') {
+
+        stablishBetslipsHubConnection((betslipsConn) => registerBetslipsHubHandlers(betslipsConn));
+    }
+
+    function stablishBetslipsHubConnection(cb) {
+        let connection = new signalR.HubConnectionBuilder()
+            .withUrl('@betslipsSignalrHubUrl/hub/betslipshub', {
+                    accessTokenFactory: () => {
+                        return "Authorization", getToken();
+                    }
+            })
+            .withAutomaticReconnect()
+            .build();
+
+            connection.start().then(function () {
+                console.log('User Connected to Betslips Signalr Hub');
+                cb(connection);
+            });
+    }
+
+    function getToken() {
+            return '@Context.GetTokenAsync("access_token").Result';
+    }
+
+    function registerBetslipsHubHandlers(connection) {
+        connection.on("SelectionCanceled", (message) => {
+            document.getElementById("Selection#" + message.selectionId + "#CurrentMinute").innerHTML = "Canceled";
+            document.getElementById("Selection#" + message.selectionId + "#HomeClubScore").innerHTML = "-";
+            document.getElementById("Selection#" + message.selectionId + "#AwayClubScore").innerHTML = "-";
+            document.getElementById("Selection#" + message.selectionId + "#Ticker").hidden = true;
+            document.getElementById("Selection#" + message.selectionId + "#Odd").hidden = true;
+            document.getElementById("Selection#" + message.selectionId + "#InitialOdd").hidden = false;
+            document.getElementById("Selection#" + message.selectionId + "#BetableStatus").innerHTML = "Not Betable";
+        });
+
+        connection.on("SelectionCurrentMinuteChanged", (message) => {
+            var currentMinute = document.getElementById("Selection#" + message.selectionId + "#CurrentMinute").innerHTML;
+            var isCanceled = currentMinute.localeCompare("Canceled");
+            var isCompleted = currentMinute.localeCompare("FT");
+            if (isCanceled != 0 && isCompleted != 0)
+            {
+                document.getElementById("Selection#" + message.selectionId + "#CurrentMinute").innerHTML = message.currentMinute;
+                if (message.currentMinute.localeCompare("1") == 0) {
+                    document.getElementById("Selection#" + message.selectionId + "#HomeClubScore").innerHTML = 0;
+                    document.getElementById("Selection#" + message.selectionId + "#AwayClubScore").innerHTML = 0;
+                    document.getElementById("Selection#" + message.selectionId + "#Ticker").hidden = false;
+                }
+                if (message.currentMinute.localeCompare("HT") == 0) {
+                    document.getElementById("Selection#" + message.selectionId + "#Ticker").hidden = true;
+                }
+                if (message.currentMinute.localeCompare("46") == 0) {
+                    document.getElementById("Selection#" + message.selectionId + "#Ticker").hidden = false;
+                }
+                if (message.currentMinute.localeCompare("FT") == 0)
+                {
+                    document.getElementById("Selection#" + message.selectionId + "#Ticker").hidden = true;
+                    document.getElementById("Selection#" + message.selectionId + "#Odd").hidden = true;
+                    document.getElementById("Selection#" + message.selectionId + "#InitialOdd").hidden = false;
+                    document.getElementById("Selection#" + message.selectionId + "#BetableStatus").innerHTML = "Not Betable";
+                }
+            }
+        });
+
+        connection.on("SelectionScoresChanged", (message) => {
+            var currentMinute = document.getElementById("Selection#" + message.selectionId + "#CurrentMinute").innerHTML;
+            var isCanceled = currentMinute.localeCompare("Canceled");
+            var isCompleted = currentMinute.localeCompare("FT");
+            if (isCanceled != 0 && isCompleted != 0)
+            {
+                document.getElementById("Selection#" + message.selectionId + "#HomeClubScore").innerHTML = message.homeClubScore;
+                document.getElementById("Selection#" + message.selectionId + "#AwayClubScore").innerHTML = message.awayClubScore;
+            }
+        });
+
+        connection.on("SelectionOddOrBetableStatusChanged", (message) => {
+            var currentMinute = document.getElementById("Selection#" + message.selectionId + "#CurrentMinute").innerHTML;
+            var isCanceled = currentMinute.localeCompare("Canceled");
+            var isCompleted = currentMinute.localeCompare("FT");
+            if (isCanceled != 0 && isCompleted != 0)
+            {
+                document.getElementById("Selection#" + message.selectionId + "#Odd").innerHTML = message.odd;
+                if (message.isBetable) {
+                    document.getElementById("Selection#" + message.selectionId + "#BetableStatus").innerHTML = "";
+                }
+                else {
+                    document.getElementById("Selection#" + message.selectionId + "#BetableStatus").innerHTML = "Not Betable";
+                }
+            }
+        });
+
+        connection.on("BetslipBetableStatusChanged", (message) => {
+            if (message.isBetable) {
+                document.getElementById("betslip-betable-status").innerHTML = "";
+                document.getElementById("betslip-checkout-button").disabled = false;
+            }
+            else {
+                document.getElementById("betslip-betable-status").innerHTML = "Not Betable";
+                document.getElementById("betslip-checkout-button").disabled = true;
+            }
+
+        });
+
+        connection.on("BetslipDetailsChanged", (message) => {
+            document.getElementById("betslip-total-odd").value = message.totalOdd;
+            document.getElementById("betslip-potential-winnings").value = message.potentialWinnings + " €";
+            document.getElementById("betslip-potential-profit").value = message.potentialProfit + " €";
+            document.getElementById("betslip-wagered-amount").placeholder = message.wageredAmount + " €";
+        });
+    }
+
+</script>

@@ -1,0 +1,30 @@
+﻿.bet-preview {
+    position: relative;
+    width: 600px;
+    height: 150px;
+    display: grid;
+    grid-template: auto auto auto;
+    grid-gap: 4px;
+    padding: 8px;
+    background-color: #444444;
+    font-size: 15.5px;
+}
+
+.bet-preview-id {
+    color: silver;
+    font-size: 17px;
+}
+
+.bet-preview div {
+    display: inline;
+}
+
+.bet-preview-view-button {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    text-align: center;
+}
+
+.bet-preview-view-button button {
+    width: 100px;
+}

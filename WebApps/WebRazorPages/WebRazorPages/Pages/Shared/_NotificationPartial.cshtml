@@ -1,0 +1,9 @@
+﻿@model Notification
+ 
+<div class="notification">
+    <div class="notification-title">@Model.Title</div>
+    <div class="notification-date">@Model.DateTimeCreated.ToString("dd/MM/yyyy HH:mm")</div>
+    <div class="notification-read-status">@(Model.IsRead ? "" :"New!")</div>
+
+    <div class="notification-description">@Model.Description</div>
+</div>

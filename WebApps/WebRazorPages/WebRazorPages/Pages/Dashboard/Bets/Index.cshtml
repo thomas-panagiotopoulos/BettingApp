@@ -1,0 +1,66 @@
+﻿@page "{handler?}"
+@model BettingApp.WebApps.WebRazorPages.Pages.Dashboard.Bets.IndexModel
+@{
+}
+@section UserBar{
+
+    <partial name="_UserBar" />
+}
+
+@section Scripts{
+    <partial name="_BettingSignalrHubScript" />
+}
+
+<div class="dashboard-side-menu-section">
+    <partial name="_DashboardSideMenu" />
+</div>
+
+<div class="bets-section">
+    <label class="bets-label">Bets</label>
+
+    <div class="bets-list">
+        @if (Model.BetPreviews != null && Model.BetPreviews.Any())
+        {
+            <table>
+                @foreach (var betPreview in Model.BetPreviews)
+                {
+                    <tr>
+                        <td>
+                            <partial name="_BetPreviewPartial" model="@betPreview" />
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+        else
+        {
+            <div class="centered-content-container">
+                <div class="centered-content-item">
+                    No Bets found
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="bets-page-bar">
+        <div class="bets-page-bar-prev-page">
+            @if (Model.PageNumber > 1)
+            {
+                <a asp-page="/Dashboard/Bets/Index" asp-route-PageNumber="@(Model.PageNumber - 1)">Prev</a>
+            }
+        </div>
+
+        <div class="bets-page-bar-current-page">
+            Page: @Model.PageNumber
+        </div>
+
+        <div class="bets-page-bar-next-page">
+            @if (Model.PageNumber < Model.TotalPages)
+            {
+                <a asp-page="/Dashboard/Bets/Index" asp-route-PageNumber="@(Model.PageNumber + 1)">Next</a>
+            }
+        </div>
+    </div>
+
+</div>
+

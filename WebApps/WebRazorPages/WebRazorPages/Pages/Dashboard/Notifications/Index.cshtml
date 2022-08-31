@@ -1,0 +1,66 @@
+﻿@page
+@model BettingApp.WebApps.WebRazorPages.Pages.Dashboard.Notifications.IndexModel
+@{
+}
+
+@section UserBar{
+
+    <partial name="_UserBar" />
+}
+
+@section Scripts{
+    
+}
+
+<div class="dashboard-side-menu-section">
+    <partial name="_DashboardSideMenu" />
+</div>
+
+<div class="notifications-section">
+    <label class="notifications-label">Notifications</label>
+
+    <div class="notifications-list">
+        @if (Model.Notifications != null && Model.Notifications.Any())
+        {
+            <table>
+                @foreach (var notification in Model.Notifications)
+                {
+                    <tr>
+                        <td>
+                            <partial name="_NotificationPartial" model="@notification" />
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+        else
+        {
+            <div class="centered-content-container">
+                <div class="centered-content-item">
+                    No Notifications found
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="notifications-page-bar">
+        <div class="notifications-page-bar-prev-page">
+            @if (Model.PageNumber > 1)
+            {
+                <a asp-page="/Dashboard/Notifications/Index" asp-route-PageNumber="@(Model.PageNumber - 1)">Prev</a>
+            }
+        </div>
+
+        <div class="notifications-page-bar-current-page">
+            Page: @Model.PageNumber
+        </div>
+
+        <div class="notifications-page-bar-next-page">
+            @if (Model.PageNumber < Model.TotalPages)
+            {
+                <a asp-page="/Dashboard/Notifications/Index" asp-route-PageNumber="@(Model.PageNumber + 1)">Next</a>
+            }
+        </div>
+    </div>
+
+</div>
